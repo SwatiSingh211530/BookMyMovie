@@ -1,0 +1,50 @@
+// Importing the 'jsonwebtoken' module and assigning it to the 'jwt' constant.
+const jwt = require('jsonwebtoken');
+
+// Exporting a middleware function that takes three arguments: 'req' (request), 'res' (response), and 'next' (callback function).
+module.exports = function (req, res, next) {
+    // The 'try' block is used to handle any potential exceptions that may occur during the execution of the code within the block.
+    try {
+        // Check if authorization header exists
+        if (!req.headers.authorization) {
+            return res.status(401).send({ 
+                success: false, 
+                message: "Access denied. No token provided." 
+            });
+        }
+
+        // Extracting the token from the 'Authorization' header in the request. The header value is expected to be in the format 'Bearer <token>'.
+        const authHeader = req.headers.authorization;
+        const token = authHeader.startsWith('Bearer ') ? authHeader.split(" ")[1] : null;
+
+        if (!token) {
+            return res.status(401).send({ 
+                success: false, 
+                message: "Access denied. Invalid token format." 
+            });
+        }
+
+        // Verifying the authenticity and integrity of the extracted JWT using the secret defined in the 'jwt_secret' environment variable.
+        const decoded = jwt.verify(token, process.env.jwt_secret);
+
+        // Adding the 'userId' from the decoded JWT payload to the 'req.body' object so that other middleware or route handlers can access it later.
+        req.body.userId = decoded.userId;
+
+        // Calling the 'next()' function to pass control to the next middleware or route handler in the chain.
+        next();
+    } catch (error) {
+        // If any errors occur during the execution of the code within the 'try' block, the 'catch' block will catch those errors and allow us to handle them.
+        console.error('Auth middleware error:', error.message);
+
+        let message = "Invalid token";
+        if (error.name === 'TokenExpiredError') {
+            message = "Token has expired. Please login again.";
+        } else if (error.name === 'JsonWebTokenError') {
+            message = "Invalid token format.";
+        }
+
+        // Sending an HTTP 401 Unauthorized response with a JSON object containing an error message.
+        res.status(401).send({ success: false, message });
+    }
+    // This line marks the end of the middleware function.
+}
