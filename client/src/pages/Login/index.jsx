@@ -49,86 +49,127 @@ function Login() {
     <div style={{
       minHeight: '100vh',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: `
-        linear-gradient(135deg, rgba(0,0,0,0.7), rgba(102, 126, 234, 0.4)),
-        url("https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
-      `,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      position: 'relative',
-      padding: '20px'
+      background: '#000'
     }}>
-      {/* Floating movie elements */}
+      {/* Left Side - Movie Theater Theme */}
       <div style={{
-        position: 'absolute',
-        top: '10%',
-        left: '10%',
-        fontSize: '32px',
-        opacity: 0.8,
-        animation: 'float 3s ease-in-out infinite'
-      }}>🎥</div>
-      <div style={{
-        position: 'absolute',
-        top: '25%',
-        right: '8%',
-        fontSize: '28px',
-        opacity: 0.7,
-        animation: 'float 4s ease-in-out infinite reverse'
-      }}>🌟</div>
-      <div style={{
-        position: 'absolute',
-        bottom: '30%',
-        left: '8%',
-        fontSize: '24px',
-        opacity: 0.6,
-        animation: 'float 5s ease-in-out infinite'
-      }}>🎪</div>
-      <div style={{
-        position: 'absolute',
-        bottom: '15%',
-        right: '12%',
-        fontSize: '30px',
-        opacity: 0.7,
-        animation: 'float 3.5s ease-in-out infinite reverse'
-      }}>🎯</div>
-
-      {/* Theater seats pattern at bottom */}
-      <div style={{
-        position: 'absolute',
-        bottom: '0',
-        left: '0',
-        right: '0',
-        height: '60px',
-        opacity: 0.3,
+        flex: 1,
+        background: `
+          linear-gradient(135deg, rgba(0,0,0,0.7), rgba(102, 126, 234, 0.4)),
+          url("https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'end'
+        alignItems: 'center',
+        padding: '40px',
+        color: 'white',
+        position: 'relative'
       }}>
-        {[...Array(20)].map((_, i) => (
-          <div key={i} style={{
-            width: '8px',
-            height: '20px',
-            background: '#ff4757',
-            margin: '0 2px',
-            borderRadius: '4px 4px 0 0'
-          }}></div>
-        ))}
+        {/* Movie Theater Elements */}
+        <div style={{ textAlign: 'center', zIndex: 2 }}>
+          <div style={{ fontSize: '120px', marginBottom: '20px' }}>🎬</div>
+          <Title level={1} style={{ 
+            color: 'white', 
+            fontSize: '48px', 
+            fontWeight: 'bold', 
+            marginBottom: '16px',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
+            BookMyMovie
+          </Title>
+          <Text style={{ 
+            fontSize: '22px', 
+            color: 'white', 
+            display: 'block', 
+            marginBottom: '30px',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+          }}>
+            Your Gateway to Cinematic Adventures
+          </Text>
+          
+          {/* Movie Theater Icons */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '30px',
+            marginTop: '40px',
+            fontSize: '32px'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎭</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Theater</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🍿</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Snacks</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎪</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Shows</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎫</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Tickets</Text>
+            </div>
+          </div>
+        </div>
+        
+        {/* Floating movie elements */}
+        <div style={{
+          position: 'absolute',
+          top: '10%',
+          left: '10%',
+          fontSize: '32px',
+          opacity: 0.8,
+          animation: 'float 3s ease-in-out infinite'
+        }}>�</div>
+        <div style={{
+          position: 'absolute',
+          top: '25%',
+          right: '8%',
+          fontSize: '28px',
+          opacity: 0.7,
+          animation: 'float 4s ease-in-out infinite reverse'
+        }}>�</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '30%',
+          left: '8%',
+          fontSize: '24px',
+          opacity: 0.6,
+          animation: 'float 5s ease-in-out infinite'
+        }}>🎪</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '15%',
+          right: '12%',
+          fontSize: '30px',
+          opacity: 0.7,
+          animation: 'float 3.5s ease-in-out infinite reverse'
+        }}>🎯</div>
       </div>
 
-      {/* Centered Login Form */}
-      <div style={{ width: '100%', maxWidth: '800px', zIndex: 10 }}>
-        <Card
-          style={{
-            borderRadius: '20px',
-            boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
-            border: 'none',
-            padding: '40px',
-            background: 'rgba(255,255,255,0.95)',
-            backdropFilter: 'blur(10px)'
-          }}
-        >
+      {/* Right Side - Login Form */}
+      <div style={{
+        flex: 1,
+        background: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '40px'
+      }}>
+        <div style={{ width: '100%', maxWidth: '500px' }}>
+          <Card
+            style={{
+              borderRadius: '20px',
+              boxShadow: '0 25px 50px rgba(0,0,0,0.1)',
+              border: 'none',
+              padding: '40px'
+            }}
+          >
           {/* Header Section */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <div style={{
@@ -298,6 +339,7 @@ function Login() {
             </Text>
           </div>
         </Card>
+        </div>
       </div>
     </div>
   );

@@ -42,96 +42,127 @@ function Register() {
     <div style={{
       minHeight: '100vh',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: `
-        linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(76, 175, 80, 0.4)),
-        url("https://images.unsplash.com/photo-1489599143687-585e645b3e1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
-      `,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      position: 'relative',
-      padding: '20px'
+      background: '#000'
     }}>
-      {/* Floating movie elements */}
+      {/* Left Side - Movie Theater Theme */}
       <div style={{
-        position: 'absolute',
-        top: '8%',
-        left: '12%',
-        fontSize: '36px',
-        opacity: 0.7,
-        animation: 'float 3.5s ease-in-out infinite'
-      }}>🎭</div>
-      <div style={{
-        position: 'absolute',
-        top: '20%',
-        right: '10%',
-        fontSize: '32px',
-        opacity: 0.8,
-        animation: 'float 4.2s ease-in-out infinite reverse'
-      }}>🍿</div>
-      <div style={{
-        position: 'absolute',
-        bottom: '25%',
-        left: '6%',
-        fontSize: '28px',
-        opacity: 0.6,
-        animation: 'float 5.1s ease-in-out infinite'
-      }}>🎪</div>
-      <div style={{
-        position: 'absolute',
-        bottom: '10%',
-        right: '8%',
-        fontSize: '30px',
-        opacity: 0.7,
-        animation: 'float 3.8s ease-in-out infinite reverse'
-      }}>🌟</div>
-
-      {/* Movie reel decoration */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '5%',
-        fontSize: '24px',
-        opacity: 0.4,
-        animation: 'float 6s ease-in-out infinite'
-      }}>🎬</div>
-
-      {/* Theater seats pattern at bottom */}
-      <div style={{
-        position: 'absolute',
-        bottom: '0',
-        left: '0',
-        right: '0',
-        height: '60px',
-        opacity: 0.3,
+        flex: 1,
+        background: `
+          linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(76, 175, 80, 0.4)),
+          url("https://images.unsplash.com/photo-1489599143687-585e645b3e1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'end'
+        alignItems: 'center',
+        padding: '40px',
+        color: 'white',
+        position: 'relative'
       }}>
-        {[...Array(18)].map((_, i) => (
-          <div key={i} style={{
-            width: '10px',
-            height: '24px',
-            background: '#4caf50',
-            margin: '0 2px',
-            borderRadius: '5px 5px 0 0'
-          }}></div>
-        ))}
+        {/* Movie Theater Elements */}
+        <div style={{ textAlign: 'center', zIndex: 2 }}>
+          <div style={{ fontSize: '120px', marginBottom: '20px' }}>🎭</div>
+          <Title level={1} style={{ 
+            color: 'white', 
+            fontSize: '48px', 
+            fontWeight: 'bold', 
+            marginBottom: '16px',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
+            Join the Show!
+          </Title>
+          <Text style={{ 
+            fontSize: '22px', 
+            color: 'white', 
+            display: 'block', 
+            marginBottom: '30px',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+          }}>
+            Create Your Cinema Account Today
+          </Text>
+          
+          {/* Cinema Features */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '30px',
+            marginTop: '40px',
+            fontSize: '32px'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎬</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Movies</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>⭐</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Premium</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎪</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Events</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🍿</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Snacks</Text>
+            </div>
+          </div>
+        </div>
+        
+        {/* Floating movie elements */}
+        <div style={{
+          position: 'absolute',
+          top: '8%',
+          left: '12%',
+          fontSize: '36px',
+          opacity: 0.7,
+          animation: 'float 3.5s ease-in-out infinite'
+        }}>�</div>
+        <div style={{
+          position: 'absolute',
+          top: '20%',
+          right: '10%',
+          fontSize: '32px',
+          opacity: 0.8,
+          animation: 'float 4.2s ease-in-out infinite reverse'
+        }}>�</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '25%',
+          left: '6%',
+          fontSize: '28px',
+          opacity: 0.6,
+          animation: 'float 5.1s ease-in-out infinite'
+        }}>�</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '8%',
+          fontSize: '30px',
+          opacity: 0.7,
+          animation: 'float 3.8s ease-in-out infinite reverse'
+        }}>🌟</div>
       </div>
 
-      {/* Centered Register Form */}
-      <div style={{ width: '100%', maxWidth: '900px', zIndex: 10 }}>
-        <Card
-          style={{
-            borderRadius: '20px',
-            boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
-            border: 'none',
-            padding: '40px',
-            background: 'rgba(255,255,255,0.96)',
-            backdropFilter: 'blur(12px)'
-          }}
-        >
+      {/* Right Side - Register Form */}
+      <div style={{
+        flex: 1,
+        background: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '40px'
+      }}>
+        <div style={{ width: '100%', maxWidth: '550px' }}>
+          <Card
+            style={{
+              borderRadius: '20px',
+              boxShadow: '0 25px 50px rgba(0,0,0,0.1)',
+              border: 'none',
+              padding: '40px'
+            }}
+          >
           {/* Header Section */}
           <div style={{ textAlign: 'center', marginBottom: '28px' }}>
             <div style={{
@@ -320,6 +351,7 @@ function Register() {
             </div>
           </div>
         </Card>
+        </div>
       </div>
     </div>
   );
