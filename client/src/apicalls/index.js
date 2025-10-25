@@ -40,17 +40,17 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       // Clear the invalid token
       localStorage.removeItem('token');
-      
+
       // Redirect to login page
       window.location.href = '/login';
-      
+
       // Return a rejected promise with a user-friendly message
       return Promise.reject({
         ...error,
         message: 'Session expired. Please login again.'
       });
     }
-    
+
     return Promise.reject(error);
   }
 );

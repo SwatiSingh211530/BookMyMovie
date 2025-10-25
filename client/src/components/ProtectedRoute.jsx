@@ -25,11 +25,11 @@ function ProtectedRoute({ children }) {
       } else {
         // If API call fails, set the user state to null and display an error message
         dispatch(SetUser(null)); // Dispatch the 'SetUser' action to set the user state to null
-        
+
         // Check if it's an authentication error (invalid/expired token)
         if (response.message && (
-          response.message.includes("token") || 
-          response.message.includes("expired") || 
+          response.message.includes("token") ||
+          response.message.includes("expired") ||
           response.message.includes("Invalid") ||
           response.message.includes("Access denied")
         )) {
@@ -45,7 +45,7 @@ function ProtectedRoute({ children }) {
       // If API call fails, set the user state to null and display an error message
       dispatch(HideLoading()); // Dispatch the 'HideLoading' action to hide the loading indicator
       dispatch(SetUser(null)); // Dispatch the 'SetUser' action to set the user state to null
-      
+
       // Handle network errors or authentication errors
       if (error.response?.status === 401) {
         // 401 Unauthorized - clear token and redirect to login

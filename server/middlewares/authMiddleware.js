@@ -7,9 +7,9 @@ module.exports = function (req, res, next) {
     try {
         // Check if authorization header exists
         if (!req.headers.authorization) {
-            return res.status(401).send({ 
-                success: false, 
-                message: "Access denied. No token provided." 
+            return res.status(401).send({
+                success: false,
+                message: "Access denied. No token provided."
             });
         }
 
@@ -18,9 +18,9 @@ module.exports = function (req, res, next) {
         const token = authHeader.startsWith('Bearer ') ? authHeader.split(" ")[1] : null;
 
         if (!token) {
-            return res.status(401).send({ 
-                success: false, 
-                message: "Access denied. Invalid token format." 
+            return res.status(401).send({
+                success: false,
+                message: "Access denied. Invalid token format."
             });
         }
 

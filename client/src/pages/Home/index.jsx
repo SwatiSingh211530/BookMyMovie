@@ -2,12 +2,12 @@ import React, { useEffect, useCallback } from "react"; // Importing React and us
 import { Col, Row, message, Tabs, Card, Button, Input, Typography } from "antd"; // Importing UI components from Ant Design
 import { useDispatch } from "react-redux"; // Importing useDispatch hook from Redux
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice"; // Importing Redux actions related to loading indicators
-import { 
-  GetAllMovies, 
-  GetLatestMoviesFromTMDB, 
-  GetPopularMoviesFromTMDB, 
-  GetUpcomingMoviesFromTMDB, 
-  GetTopRatedMoviesFromTMDB, 
+import {
+  GetAllMovies,
+  GetLatestMoviesFromTMDB,
+  GetPopularMoviesFromTMDB,
+  GetUpcomingMoviesFromTMDB,
+  GetTopRatedMoviesFromTMDB,
   GetMovieGenresFromTMDB,
   GetMoviesByGenreFromTMDB,
   SearchMoviesFromTMDB,
@@ -39,7 +39,7 @@ function Home() {
   const [isLocalMovie, setIsLocalMovie] = React.useState(false);
   const [isSearching, setIsSearching] = React.useState(false);
   const [searchState, setSearchState] = React.useState(''); // '', 'searching', 'success', 'error'
-  
+
   const navigate = useNavigate(); // Creating a navigate function using the useNavigate hook
   const dispatch = useDispatch(); // Creating a dispatch function using the useDispatch hook
 
@@ -64,7 +64,7 @@ function Home() {
   const getTMDBMovies = useCallback(async () => {
     try {
       dispatch(ShowLoading());
-      
+
       // Fetch different categories
       const [latestRes, popularRes, upcomingRes, topRatedRes, genresRes] = await Promise.all([
         GetLatestMoviesFromTMDB(),
@@ -90,7 +90,7 @@ function Home() {
   // Function to search movies
   const handleSearch = async (value) => {
     const searchValue = value.trim();
-    
+
     if (!searchValue) {
       setSearchResults([]);
       setSearchQuery('');
@@ -102,26 +102,26 @@ function Home() {
       }
       return;
     }
-    
+
     try {
       setIsSearching(true);
       setSearchState('searching');
       dispatch(ShowLoading());
       setSearchQuery(searchValue);
-      
+
       const response = await SearchMoviesFromTMDB(searchValue);
-      
+
       if (response.success) {
         setSearchResults(response.data || []);
         setActiveTab('search');
         setSearchState('success');
-        
+
         if (!response.data || response.data.length === 0) {
           message.info(`🔍 No movies found for "${searchValue}". Try a different search term.`);
         } else {
           message.success(`🎬 Found ${response.data.length} movies for "${searchValue}"`);
         }
-        
+
         // Clear success state after 2 seconds
         setTimeout(() => setSearchState(''), 2000);
       } else {
@@ -130,7 +130,7 @@ function Home() {
         setSearchState('error');
         setTimeout(() => setSearchState(''), 3000);
       }
-      
+
       setIsSearching(false);
       dispatch(HideLoading());
     } catch (error) {
@@ -226,8 +226,8 @@ function Home() {
                 <img
                   alt={movie.title}
                   src={
-                    isLocal 
-                      ? movie.poster 
+                    isLocal
+                      ? movie.poster
                       : `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                   }
                   style={{ height: 300, objectFit: 'cover' }}
@@ -237,8 +237,8 @@ function Home() {
                 />
               }
               actions={[
-                <Button 
-                  type="primary" 
+                <Button
+                  type="primary"
                   onClick={() => handleMovieClick(movie, isLocal)}
                 >
                   {isLocal ? 'Book Now' : 'View Details'}
@@ -250,14 +250,14 @@ function Home() {
                 description={
                   <div>
                     <p style={{ fontSize: '12px', color: '#888' }}>
-                      {isLocal 
+                      {isLocal
                         ? `${movie.genre} • ${movie.duration} min`
                         : `Rating: ${movie.vote_average}/10 • ${movie.release_date}`
                       }
                     </p>
-                    <p style={{ 
-                      fontSize: '13px', 
-                      overflow: 'hidden', 
+                    <p style={{
+                      fontSize: '13px',
+                      overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       display: '-webkit-box',
                       WebkitLineClamp: 3,
@@ -295,23 +295,23 @@ function Home() {
             Discover, Book & Enjoy the Latest Movies
           </Title>
           <Text style={{ fontSize: '18px', color: 'white', display: 'block', marginBottom: '40px', opacity: 0.8 }}>
-            Browse thousands of movies, from the latest blockbusters to timeless classics. 
+            Browse thousands of movies, from the latest blockbusters to timeless classics.
             Find showtimes, book tickets, and create unforgettable movie experiences.
           </Text>
-          
+
           {/* Hero Search */}
           <div className={`movie-search-container ${searchState}`}>
             <Search
               placeholder="🔍 Search for movies, genres, or actors..."
               allowClear
               enterButton={
-                isSearching 
-                  ? "🔄 Searching..." 
+                isSearching
+                  ? "🔄 Searching..."
                   : searchState === 'success'
-                  ? "✅ Found Movies!"
-                  : searchState === 'error'
-                  ? "❌ Try Again"
-                  : "🎬 Search Movies"
+                    ? "✅ Found Movies!"
+                    : searchState === 'error'
+                      ? "❌ Try Again"
+                      : "🎬 Search Movies"
               }
               size="large"
               value={searchQuery}
@@ -372,12 +372,12 @@ function Home() {
 
         {/* Search Results Info */}
         {activeTab === 'search' && searchQuery && (
-          <div style={{ 
-            marginBottom: '20px', 
-            padding: '16px', 
-            background: '#f0f8ff', 
+          <div style={{
+            marginBottom: '20px',
+            padding: '16px',
+            background: '#f0f8ff',
             borderRadius: '8px',
-            border: '1px solid #d6e4ff' 
+            border: '1px solid #d6e4ff'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
@@ -388,9 +388,9 @@ function Home() {
                   {searchResults.length} movies found
                 </p>
               </div>
-              <Button 
-                type="primary" 
-                ghost 
+              <Button
+                type="primary"
+                ghost
                 onClick={() => {
                   setSearchQuery('');
                   setSearchResults([]);
@@ -422,142 +422,142 @@ function Home() {
           </div>
         )}
 
-      {/* Movie Tabs */}
-      <Tabs 
-        activeKey={activeTab} 
-        onChange={setActiveTab} 
-        type="card"
-        items={[
-          // Local Movies Tab
-          {
-            key: 'local',
-            label: `Local Theatre Movies (${movies.length})`,
-            children: (
-              <div>
-                <h2>Movies Available in Local Theatres</h2>
-                {movies.length > 0 ? (
-                  renderMovieCards(movies, true)
-                ) : (
-                  <div style={{ textAlign: 'center', padding: '40px' }}>
-                    <p>No local movies available. Check back later!</p>
-                  </div>
-                )}
-              </div>
-            )
-          },
-          // Latest Movies Tab
-          {
-            key: 'latest',
-            label: `Now Playing (${latestMovies.length})`,
-            children: (
-              <div>
-                <h2>Now Playing in Cinemas</h2>
-                {activeTab === 'search' && searchResults.length > 0 ? (
-                  <div>
-                    <div style={{ marginBottom: '20px' }}>
-                      <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
-                        🔍 Search Results for "{searchQuery}"
-                      </h3>
-                      <p style={{ color: '#666', fontSize: '14px' }}>
-                        Found {searchResults.length} movies matching your search
-                      </p>
+        {/* Movie Tabs */}
+        <Tabs
+          activeKey={activeTab}
+          onChange={setActiveTab}
+          type="card"
+          items={[
+            // Local Movies Tab
+            {
+              key: 'local',
+              label: `Local Theatre Movies (${movies.length})`,
+              children: (
+                <div>
+                  <h2>Movies Available in Local Theatres</h2>
+                  {movies.length > 0 ? (
+                    renderMovieCards(movies, true)
+                  ) : (
+                    <div style={{ textAlign: 'center', padding: '40px' }}>
+                      <p>No local movies available. Check back later!</p>
                     </div>
-                    {renderMovieCards(searchResults)}
-                  </div>
-                ) : (
-                  renderMovieCards(latestMovies)
-                )}
-              </div>
-            )
-          },
-          // Popular Movies Tab
-          {
-            key: 'popular',
-            label: `Popular (${popularMovies.length})`,
-            children: (
-              <div>
-                <h2>Popular Movies</h2>
-                {activeTab === 'search' && searchResults.length > 0 ? (
-                  <div>
-                    <div style={{ marginBottom: '20px' }}>
-                      <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
-                        🔍 Search Results for "{searchQuery}"
-                      </h3>
-                      <p style={{ color: '#666', fontSize: '14px' }}>
-                        Found {searchResults.length} movies matching your search
-                      </p>
+                  )}
+                </div>
+              )
+            },
+            // Latest Movies Tab
+            {
+              key: 'latest',
+              label: `Now Playing (${latestMovies.length})`,
+              children: (
+                <div>
+                  <h2>Now Playing in Cinemas</h2>
+                  {activeTab === 'search' && searchResults.length > 0 ? (
+                    <div>
+                      <div style={{ marginBottom: '20px' }}>
+                        <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
+                          🔍 Search Results for "{searchQuery}"
+                        </h3>
+                        <p style={{ color: '#666', fontSize: '14px' }}>
+                          Found {searchResults.length} movies matching your search
+                        </p>
+                      </div>
+                      {renderMovieCards(searchResults)}
                     </div>
-                    {renderMovieCards(searchResults)}
-                  </div>
-                ) : (
-                  renderMovieCards(popularMovies)
-                )}
-              </div>
-            )
-          },
-          // Upcoming Movies Tab
-          {
-            key: 'upcoming',
-            label: `Upcoming (${upcomingMovies.length})`,
-            children: (
-              <div>
-                <h2>Coming Soon</h2>
-                {activeTab === 'search' && searchResults.length > 0 ? (
-                  <div>
-                    <div style={{ marginBottom: '20px' }}>
-                      <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
-                        🔍 Search Results for "{searchQuery}"
-                      </h3>
-                      <p style={{ color: '#666', fontSize: '14px' }}>
-                        Found {searchResults.length} movies matching your search
-                      </p>
+                  ) : (
+                    renderMovieCards(latestMovies)
+                  )}
+                </div>
+              )
+            },
+            // Popular Movies Tab
+            {
+              key: 'popular',
+              label: `Popular (${popularMovies.length})`,
+              children: (
+                <div>
+                  <h2>Popular Movies</h2>
+                  {activeTab === 'search' && searchResults.length > 0 ? (
+                    <div>
+                      <div style={{ marginBottom: '20px' }}>
+                        <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
+                          🔍 Search Results for "{searchQuery}"
+                        </h3>
+                        <p style={{ color: '#666', fontSize: '14px' }}>
+                          Found {searchResults.length} movies matching your search
+                        </p>
+                      </div>
+                      {renderMovieCards(searchResults)}
                     </div>
-                    {renderMovieCards(searchResults)}
-                  </div>
-                ) : (
-                  renderMovieCards(upcomingMovies)
-                )}
-              </div>
-            )
-          },
-          // Top Rated Movies Tab
-          {
-            key: 'toprated',
-            label: `Top Rated (${topRatedMovies.length})`,
-            children: (
-              <div>
-                <h2>Top Rated Movies</h2>
-                {activeTab === 'search' && searchResults.length > 0 ? (
-                  <div>
-                    <div style={{ marginBottom: '20px' }}>
-                      <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
-                        🔍 Search Results for "{searchQuery}"
-                      </h3>
-                      <p style={{ color: '#666', fontSize: '14px' }}>
-                        Found {searchResults.length} movies matching your search
-                      </p>
+                  ) : (
+                    renderMovieCards(popularMovies)
+                  )}
+                </div>
+              )
+            },
+            // Upcoming Movies Tab
+            {
+              key: 'upcoming',
+              label: `Upcoming (${upcomingMovies.length})`,
+              children: (
+                <div>
+                  <h2>Coming Soon</h2>
+                  {activeTab === 'search' && searchResults.length > 0 ? (
+                    <div>
+                      <div style={{ marginBottom: '20px' }}>
+                        <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
+                          🔍 Search Results for "{searchQuery}"
+                        </h3>
+                        <p style={{ color: '#666', fontSize: '14px' }}>
+                          Found {searchResults.length} movies matching your search
+                        </p>
+                      </div>
+                      {renderMovieCards(searchResults)}
                     </div>
-                    {renderMovieCards(searchResults)}
-                  </div>
-                ) : (
-                  renderMovieCards(topRatedMovies)
-                )}
-              </div>
-            )
-          },
-          // Genre Results Tab (conditionally rendered)
-          ...(activeTab === 'genre' ? [{
-            key: 'genre',
-            label: `Genre Movies (${tmdbMovies.length})`,
-            children: (
-              <div>
-                <h2>Movies by Genre</h2>
-                {renderMovieCards(tmdbMovies)}
-              </div>
-            )
-          }] : [])
-        ]}
-      />
+                  ) : (
+                    renderMovieCards(upcomingMovies)
+                  )}
+                </div>
+              )
+            },
+            // Top Rated Movies Tab
+            {
+              key: 'toprated',
+              label: `Top Rated (${topRatedMovies.length})`,
+              children: (
+                <div>
+                  <h2>Top Rated Movies</h2>
+                  {activeTab === 'search' && searchResults.length > 0 ? (
+                    <div>
+                      <div style={{ marginBottom: '20px' }}>
+                        <h3 style={{ color: '#1890ff', marginBottom: '8px' }}>
+                          🔍 Search Results for "{searchQuery}"
+                        </h3>
+                        <p style={{ color: '#666', fontSize: '14px' }}>
+                          Found {searchResults.length} movies matching your search
+                        </p>
+                      </div>
+                      {renderMovieCards(searchResults)}
+                    </div>
+                  ) : (
+                    renderMovieCards(topRatedMovies)
+                  )}
+                </div>
+              )
+            },
+            // Genre Results Tab (conditionally rendered)
+            ...(activeTab === 'genre' ? [{
+              key: 'genre',
+              label: `Genre Movies (${tmdbMovies.length})`,
+              children: (
+                <div>
+                  <h2>Movies by Genre</h2>
+                  {renderMovieCards(tmdbMovies)}
+                </div>
+              )
+            }] : [])
+          ]}
+        />
 
         {/* Movie Details Modal */}
         <MovieDetailsModal

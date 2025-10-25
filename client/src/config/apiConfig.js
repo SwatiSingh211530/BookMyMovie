@@ -11,26 +11,26 @@ export const API_ENDPOINTS = {
   REGISTER: `${API_BASE_URL}/users/register`,
   LOGIN: `${API_BASE_URL}/users/login`,
   GET_CURRENT_USER: `${API_BASE_URL}/users/get-current-user`,
-  
+
   // Movie endpoints
   GET_ALL_MOVIES: `${API_BASE_URL}/movies`,
   ADD_MOVIE: `${API_BASE_URL}/movies`,
   UPDATE_MOVIE: `${API_BASE_URL}/movies`,
   DELETE_MOVIE: `${API_BASE_URL}/movies`,
-  
+
   // Theatre endpoints
   GET_ALL_THEATRES: `${API_BASE_URL}/theatres`,
   ADD_THEATRE: `${API_BASE_URL}/theatres`,
   UPDATE_THEATRE: `${API_BASE_URL}/theatres`,
   DELETE_THEATRE: `${API_BASE_URL}/theatres`,
   GET_THEATRES_BY_MOVIE: `${API_BASE_URL}/theatres/get-all-theatres-by-movie`,
-  
+
   // Show endpoints
   ADD_SHOW: `${API_BASE_URL}/theatres/add-show`,
   GET_ALL_SHOWS_BY_THEATRE: `${API_BASE_URL}/theatres/get-all-shows-by-theatre`,
   DELETE_SHOW: `${API_BASE_URL}/theatres/delete-show`,
   GET_SHOW_BY_ID: `${API_BASE_URL}/theatres/get-show-by-id`,
-  
+
   // TMDB endpoints (these might be direct to TMDB, but keeping consistent structure)
   TMDB_LATEST: `${API_BASE_URL}/movies/tmdb/latest`,
   TMDB_POPULAR: `${API_BASE_URL}/movies/tmdb/popular`,
