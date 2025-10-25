@@ -166,6 +166,7 @@ cd ..
 ### 4. Environment Configuration
 
 #### Server Environment Setup
+
 Create a `.env` file in the `server/` directory:
 
 ```env
@@ -177,6 +178,7 @@ CLIENT_URL=http://localhost:3000
 ```
 
 #### Client Environment Setup
+
 Create a `.env` file in the `client/` directory:
 
 ```env
@@ -187,10 +189,12 @@ REACT_APP_API_BASE_URL=http://localhost:5000/api
 ### 5. Database Setup
 
 #### Option 1: Local MongoDB
+
 - Ensure MongoDB is running on your system
 - The application will automatically create the database and collections
 
 #### Option 2: MongoDB Atlas (Cloud)
+
 - Create a MongoDB Atlas account
 - Create a new cluster
 - Update the `mongodb_url` in your `.env` file with your Atlas connection string
@@ -207,32 +211,39 @@ node seedUsers.js
 ### Development Mode
 
 #### Start the Backend Server
+
 ```bash
 cd server
 npm start
 ```
+
 Server will start on: `http://localhost:5000`
 
 #### Start the Frontend Development Server
+
 ```bash
 cd client
 npm start
 ```
+
 Client will start on: `http://localhost:3000`
 
 ## Default Users & Authentication
 
 ### Admin User
+
 - **Email:** `admin@bookmymovie.com`
 - **Password:** `admin123`
 - **Role:** Administrator
 
 ### Theatre Owner
+
 - **Email:** `theatre@bookmymovie.com`
 - **Password:** `theatre123`
 - **Role:** Theatre Owner
 
 ### Regular User
+
 - **Email:** `user@bookmymovie.com`
 - **Password:** `user123`
 - **Role:** User
@@ -240,6 +251,7 @@ Client will start on: `http://localhost:3000`
 ## API Documentation
 
 ### Authentication Endpoints
+
 ```http
 POST   /api/users/register          # Register new user
 POST   /api/users/login            # User login
@@ -247,6 +259,7 @@ GET    /api/users/get-current-user  # Get current user info
 ```
 
 ### Movie Management Endpoints
+
 ```http
 GET    /api/movies/get-all-movies   # Get all movies
 POST   /api/movies/add-movie        # Add new movie (Admin)
@@ -256,6 +269,7 @@ GET    /api/movies/get-movie-by-id  # Get movie details
 ```
 
 ### Theatre Management Endpoints
+
 ```http
 GET    /api/theatres/get-all-theatres        # Get all theatres
 POST   /api/theatres/add-theatre             # Add theatre (Owner)
@@ -265,6 +279,7 @@ GET    /api/theatres/get-theatres-by-owner   # Get owner's theatres
 ```
 
 ### Show Management Endpoints
+
 ```http
 POST   /api/theatres/add-show               # Add new show (Owner)
 GET    /api/theatres/get-all-shows-by-movie # Get shows for movie
@@ -275,12 +290,14 @@ DELETE /api/theatres/delete-show            # Delete show (Owner)
 ## Key Features
 
 ### User Interface
+
 - **Responsive Design**: Works on desktop, tablet, and mobile
 - **Modern UI**: Built with Ant Design for professional appearance
 - **Real-time Updates**: Dynamic content updates without page refresh
 - **Interactive Components**: Engaging user interactions and feedback
 
 ### Security Features
+
 - **JWT Authentication**: Secure token-based authentication
 - **Password Hashing**: bcrypt.js for secure password storage
 - **Route Protection**: Protected routes with authentication middleware
@@ -289,16 +306,20 @@ DELETE /api/theatres/delete-show            # Delete show (Owner)
 ## Deployment
 
 ### Frontend Deployment (Vercel)
+
 1. Link your GitHub repository to Vercel
 2. Set the root directory to `client/`
 3. Set environment variables:
+
    ```
    REACT_APP_SERVER_URL=https://your-backend-domain.com
    REACT_APP_API_BASE_URL=https://your-backend-domain.com/api
    ```
 
 ### Backend Deployment (Railway/Heroku/Render)
+
 1. Set environment variables:
+
    ```
    mongodb_url=your_mongodb_atlas_connection_string
    jwt_secret=your_secure_jwt_secret
@@ -309,6 +330,7 @@ DELETE /api/theatres/delete-show            # Delete show (Owner)
 ## Testing
 
 ### Manual Testing Checklist
+
 - [ ] User registration and login
 - [ ] Admin movie management
 - [ ] Theatre owner theatre creation
@@ -321,6 +343,7 @@ DELETE /api/theatres/delete-show            # Delete show (Owner)
 ### Common Issues
 
 **MongoDB Connection Error:**
+
 ```bash
 # Check if MongoDB is running (Linux/Mac)
 sudo systemctl status mongod
@@ -329,12 +352,14 @@ sudo systemctl start mongod
 ```
 
 **Port Already in Use:**
+
 ```bash
 # Kill process on port 5000
 sudo kill -9 $(lsof -t -i:5000)
 ```
 
 **JWT Token Issues:**
+
 - Ensure JWT_SECRET is properly set in environment variables
 - Check token expiration in browser developer tools
 - Clear browser localStorage if needed
@@ -354,8 +379,9 @@ This project is licensed under the **MIT License**.
 ## Author
 
 **Swati Singh**
+
 - GitHub: [@SwatiSingh211530](https://github.com/SwatiSingh211530)
-- Email: swatisingh211530@gmail.com
+- Email: <swatisingh211530@gmail.com>
 
 ## Acknowledgments
 
