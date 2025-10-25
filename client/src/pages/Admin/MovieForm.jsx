@@ -4,7 +4,7 @@ import { Form, Input, Modal, Row, Col, message } from "antd"; // Import Ant Desi
 import Button from "../../components/Button"; // Import custom Button component
 import { useDispatch } from "react-redux"; // Import useDispatch hook for Redux
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice"; // Import Redux actions
-import { AddMovie, UpdateMovie } from "../../apicalls/movies"; // Import API call functions
+import { AddMovie, UpdateMovie, ClearMoviesCache } from "../../apicalls/movies"; // Import API call functions
 import moment from "moment"; // Import moment library for date manipulation
 
 // Define the MovieForm component
@@ -44,6 +44,7 @@ function MovieForm({
       // Check if API call was successful
       if (response.success) {
         getData(); // Fetch updated data
+        ClearMoviesCache(); // Clear movies cache to ensure fresh data on mobile
         message.success(response.message); // Display success message
         setShowMovieFormModal(false); // Close the modal
       } else {

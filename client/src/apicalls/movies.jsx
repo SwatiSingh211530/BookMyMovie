@@ -15,18 +15,74 @@ export const AddMovie = async (payload) => {
   }
 };
 
-// get all movies function (admin and user)
+// get all movies function with local storage caching for mobile devices
 export const GetAllMovies = async () => {
+  const STORAGE_KEY = 'bookMyMovie_movies';
+  const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes in milliseconds
+  
   try {
+    // Check if we have cached movies in localStorage
+    const cachedData = localStorage.getItem(STORAGE_KEY);
+    if (cachedData) {
+      const parsedCache = JSON.parse(cachedData);
+      const now = new Date().getTime();
+      
+      // If cache is still valid (within 30 minutes), return cached data
+      if (now - parsedCache.timestamp < CACHE_DURATION) {
+        console.log('Loading movies from cache for better mobile performance');
+        return {
+          success: true,
+          data: parsedCache.movies,
+          fromCache: true
+        };
+      }
+    }
+
     // Send a GET request to the "/api/movies/get-all-movies" endpoint.
     const response = await axiosInstance.get("/api/movies/get-all-movies");
-    // If the request is successful (status code 2xx), return the data from the response.
+    
+    // If the request is successful, cache the data for mobile devices
+    if (response.data.success) {
+      const cacheData = {
+        movies: response.data.data,
+        timestamp: new Date().getTime()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cacheData));
+      console.log('Movies cached for mobile performance');
+    }
+    
+    // Return the data from the response.
     return response.data;
   } catch (error) {
-    // If an error occurs during the request, return the response from the error object.
-    // This may include the status code, headers, and possibly an error message from the server.
+    // If API fails, try to return cached data as fallback for mobile
+    const cachedData = localStorage.getItem(STORAGE_KEY);
+    if (cachedData) {
+      const parsedCache = JSON.parse(cachedData);
+      console.log('API failed, loading movies from cache as fallback');
+      return {
+        success: true,
+        data: parsedCache.movies,
+        fromCache: true,
+        fallback: true
+      };
+    }
+    
+    // If no cache available, return the error response
     return error.response;
   }
+};
+
+// Clear movies cache - useful for admin operations or manual refresh
+export const ClearMoviesCache = () => {
+  const STORAGE_KEY = 'bookMyMovie_movies';
+  localStorage.removeItem(STORAGE_KEY);
+  console.log('Movies cache cleared');
+};
+
+// Check if movies are loaded from cache
+export const IsMoviesCached = () => {
+  const STORAGE_KEY = 'bookMyMovie_movies';
+  return localStorage.getItem(STORAGE_KEY) !== null;
 };
 
 // update movie function (admin only)

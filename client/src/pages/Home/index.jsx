@@ -12,7 +12,8 @@ import {
   GetMoviesByGenreFromTMDB,
   SearchMoviesFromTMDB,
   ImportMovieFromTMDB,
-  GetMovieDetailsFromTMDB
+  GetMovieDetailsFromTMDB,
+  ClearMoviesCache
 } from "../../apicalls/movies"; // Importing API call functions for movies
 import { useNavigate } from "react-router-dom"; // Importing useNavigate hook from React Router DOM
 import moment from "moment";
@@ -43,13 +44,22 @@ function Home() {
   const navigate = useNavigate(); // Creating a navigate function using the useNavigate hook
   const dispatch = useDispatch(); // Creating a dispatch function using the useDispatch hook
 
-  // Define a function called 'getData' to fetch all movies from the API.
+  // Define a function called 'getData' to fetch all movies from the API with mobile caching.
   const getData = useCallback(async () => {
     try {
       dispatch(ShowLoading()); // `dispatch` is a function provided to every Redux component by the `react-redux` package.
-      const response = await GetAllMovies(); // Calling the API function to fetch all movies
+      const response = await GetAllMovies(); // Calling the API function to fetch all movies (with caching)
       if (response.success) {
         setMovies(response.data); // Setting the state variable to store the movies
+        
+        // Show appropriate message based on data source
+        if (response.fromCache) {
+          if (response.fallback) {
+            message.warning('Network unavailable. Showing cached movies for offline viewing.');
+          } else {
+            console.log('Movies loaded from cache for faster mobile experience');
+          }
+        }
       } else {
         message.error(response.message); // Displaying an error message using Ant Design's message component
       }

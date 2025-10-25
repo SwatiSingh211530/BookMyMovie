@@ -6,7 +6,7 @@ import moment from "moment"; // Importing a library for working with dates
 import { Table, message } from "antd"; // Importing UI components from Ant Design
 import { useDispatch } from "react-redux"; // Importing useDispatch hook from Redux
 import { HideLoading, ShowLoading } from "../../redux/loadersSlice"; // Importing Redux actions related to loading indicators
-import { DeleteMovie, GetAllMovies } from "../../apicalls/movies"; // Importing API call functions for movies
+import { DeleteMovie, GetAllMovies, ClearMoviesCache } from "../../apicalls/movies"; // Importing API call functions for movies
 import { useEffect } from "react"; // Importing useEffect hook for side effects
 
 function MoviesList() {
@@ -44,6 +44,7 @@ function MoviesList() {
       });
       if (response.success) {
         getData(); // Fetching updated data after successful deletion
+        ClearMoviesCache(); // Clear movies cache to ensure fresh data on mobile
         message.success(response.message); // Displaying a success message using Ant Design's message component
       } else {
         message.error(response.message); // Displaying an error message using Ant Design's message component
