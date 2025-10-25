@@ -13,15 +13,30 @@ require('dotenv').config();
 // Import the database configuration module from ./config/dbConfig.js
 const dbConfig = require('./config/dbConfig');
 
-// CORS configuration
+// CORS configuration - Allow multiple origins
 const allowedOrigins = [
     'http://localhost:3000', // Local development
     'https://book-my-movie23.vercel.app', // Vercel deployment
-    process.env.CLIENT_URL // Environment variable
+    process.env.CLIENT_URL // Environment variable from Render
 ].filter(Boolean); // Remove any undefined values
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, etc.)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        
+        // For development, also allow any localhost
+        if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+            return callback(null, true);
+        }
+        
+        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
