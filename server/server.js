@@ -14,8 +14,14 @@ require('dotenv').config();
 const dbConfig = require('./config/dbConfig');
 
 // CORS configuration
+const allowedOrigins = [
+    'http://localhost:3000', // Local development
+    'https://book-my-movie23.vercel.app', // Vercel deployment
+    process.env.CLIENT_URL // Environment variable
+].filter(Boolean); // Remove any undefined values
+
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000', // Allow requests from the React app
+    origin: allowedOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
