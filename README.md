@@ -54,83 +54,82 @@ A comprehensive full-stack web application for movie ticket booking built with t
 
 ```
 mern-bookmymovie-application/
- README.md
- package.json
- nodemon.json
- client/                           # React Frontend Application
-    package.json
-    vercel.json                   # Vercel deployment configuration
-    public/
-       index.html
-       manifest.json
-       robots.txt
-    src/
-        App.js                    # Main App component
-        index.js                  # React DOM entry point
-        index.css                 # Global styles
-        apicalls/                 # API service functions
-           index.js              # Axios configuration
-           movies.jsx            # Movie-related API calls
-           theatres.jsx          # Theatre-related API calls
-           users.js              # User-related API calls
-        components/               # Reusable React components
-           Button.jsx            # Custom button component
-           MovieDetailsModal.jsx # Movie details modal
-           PageTitle.jsx         # Page title component
-           ProtectedRoute.jsx    # Route protection component
-        pages/                    # Page components
-           Admin/                # Admin panel pages
-              index.jsx         # Admin dashboard
-              MovieForm.jsx     # Add/Edit movie form
-              MoviesList.jsx    # Movies management
-              TheatresList.jsx  # Theatres management
-           BookShow/             # Show booking functionality
-              index.jsx         # Seat selection and booking
-           Home/                 # Home page
-              index.jsx         # Movies catalog display
-           Login/                # Authentication
-              index.jsx         # Login form
-           Profile/              # User profile management
-              index.jsx         # Profile dashboard
-              TheatreForm.jsx   # Theatre owner forms
-              TheatresList.jsx  # Theatre owner theatres
-              Shows/            # Show management
-                  index.jsx     # Shows list and creation
-           Register/             # User registration
-              index.jsx         # Registration form
-           TheatresForMovie/     # Theatre selection
-               index.jsx         # Theatre list for selected movie
-        redux/                    # State management
-           store.jsx             # Redux store configuration
-           loadersSlice.jsx      # Loading states management
-           usersSlice.jsx        # User state management
-        stylesheets/              # CSS styling
-           alignments.css        # Layout and alignment styles
-           custom.css            # Custom component styles
-           form-elements.css     # Form styling
-           sizes.css             # Size utilities
-           theme.css             # Theme and color variables
-        utils/                    # Utility functions
-            tokenCleanup.js       # JWT token management
- server/                           # Node.js Backend Application
-     package.json
-     server.js                     # Express server entry point
-     seedUsers.js                  # Database seeding script
-     updateAdminPassword.js        # Admin password update utility
-     .env.template                 # Environment variables template
-     config/                       # Configuration files
-        dbConfig.js               # MongoDB connection configuration
-     middlewares/                  # Express middlewares
-        authMiddleware.js         # JWT authentication middleware
-     models/                       # Mongoose data models
-        userModel.js              # User schema and model
-        movieModel.js             # Movie schema and model
-        theatreModel.js           # Theatre schema and model
-        showModel.js              # Show schema and model
-     routes/                       # API route handlers
-         userRoute.js              # User authentication and profile routes
-         moviesRoute.js            # Movie management routes
-         theatresRoute.js          # Theatre and show management routes
+├── README.md
+├── package.json
+├── nodemon.json
+├── client/
+│   ├── package.json
+│   ├── vercel.json
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   └── src/
+│       ├── App.js
+│       ├── index.js
+│       ├── index.css
+│       ├── apicalls/
+│       │   ├── index.js
+│       │   ├── movies.jsx
+│       │   ├── theatres.jsx
+│       │   └── users.js
+│       ├── components/
+│       │   ├── Button.jsx
+│       │   ├── MovieDetailsModal.jsx
+│       │   ├── PageTitle.jsx
+│       │   └── ProtectedRoute.jsx
+│       ├── pages/
+│       │   ├── Admin/
+│       │   │   ├── index.jsx
+│       │   │   ├── MovieForm.jsx
+│       │   │   ├── MoviesList.jsx
+│       │   │   └── TheatresList.jsx
+│       │   ├── BookShow/
+│       │   │   └── index.jsx
+│       │   ├── Home/
+│       │   │   └── index.jsx
+│       │   ├── Login/
+│       │   │   └── index.jsx
+│       │   ├── Profile/
+│       │   │   ├── index.jsx
+│       │   │   ├── TheatreForm.jsx
+│       │   │   ├── TheatresList.jsx
+│       │   │   └── Shows/
+│       │   │       └── index.jsx
+│       │   ├── Register/
+│       │   │   └── index.jsx
+│       │   └── TheatresForMovie/
+│       │       └── index.jsx
+│       ├── redux/
+│       │   ├── store.jsx
+│       │   ├── loadersSlice.jsx
+│       │   └── usersSlice.jsx
+│       ├── stylesheets/
+│       │   ├── alignments.css
+│       │   ├── custom.css
+│       │   ├── form-elements.css
+│       │   ├── sizes.css
+│       │   └── theme.css
+│       └── utils/
+│           └── tokenCleanup.js
+└── server/
+    ├── package.json
+    ├── server.js
+    ├── seedUsers.js
+    ├── updateAdminPassword.js
+    ├── config/
+    │   └── dbConfig.js
+    ├── middlewares/
+    │   └── authMiddleware.js
+    ├── models/
+    │   ├── userModel.js
+    │   ├── movieModel.js
+    │   ├── theatreModel.js
+    │   └── showModel.js
+    └── routes/
+        ├── userRoute.js
+        ├── moviesRoute.js
+        └── theatresRoute.js
 ```
 
 ## Installation & Setup
