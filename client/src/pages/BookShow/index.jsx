@@ -47,11 +47,11 @@ function BookShow() {
     return (
       <div className="flex gap-1 flex-col p-2 card">
         {/* Generate seat numbers */}
-        {Array.from(Array(rows).keys()).map((seat, index) => {
+        {Array.from(Array(rows).keys()).map((seat) => {
           return (
             // Render seats within the total seat limit
             <div className="flex gap-1 justify-center">
-              {Array.from(Array(columns).keys()).map((column, index) => {
+              {Array.from(Array(columns).keys()).map((column) => {
                 const seatNumber = seat * columns + column + 1; // Calculate seat number
                 let seatClass = "seat"; // Default seat class
 

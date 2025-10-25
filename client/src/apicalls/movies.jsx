@@ -19,14 +19,14 @@ export const AddMovie = async (payload) => {
 export const GetAllMovies = async () => {
   const STORAGE_KEY = 'bookMyMovie_movies';
   const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes in milliseconds
-  
+
   try {
     // Check if we have cached movies in localStorage
     const cachedData = localStorage.getItem(STORAGE_KEY);
     if (cachedData) {
       const parsedCache = JSON.parse(cachedData);
       const now = new Date().getTime();
-      
+
       // If cache is still valid (within 30 minutes), return cached data
       if (now - parsedCache.timestamp < CACHE_DURATION) {
         console.log('Loading movies from cache for better mobile performance');
@@ -40,7 +40,7 @@ export const GetAllMovies = async () => {
 
     // Send a GET request to the "/api/movies/get-all-movies" endpoint.
     const response = await axiosInstance.get("/api/movies/get-all-movies");
-    
+
     // If the request is successful, cache the data for mobile devices
     if (response.data.success) {
       const cacheData = {
@@ -50,7 +50,7 @@ export const GetAllMovies = async () => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cacheData));
       console.log('Movies cached for mobile performance');
     }
-    
+
     // Return the data from the response.
     return response.data;
   } catch (error) {
@@ -66,7 +66,7 @@ export const GetAllMovies = async () => {
         fallback: true
       };
     }
-    
+
     // If no cache available, return the error response
     return error.response;
   }

@@ -1,7 +1,6 @@
 // Import necessary libraries and components
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Button from "../../components/Button"; // Custom Button component
-import { useNavigate } from "react-router-dom"; // Navigation hook
 import TheatreForm from "./TheatreForm"; // Component for theatre form
 import { GetAllTheatresByOwner, DeleteTheatre } from "../../apicalls/theatres"; // API calls for theatres
 import { useDispatch, useSelector } from "react-redux"; // Redux hooks
@@ -26,10 +25,9 @@ function TheatresList() {
 
   // Redux dispatcher and navigation hook
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // Function to fetch theatre data
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       dispatch(ShowLoading()); // Show loading indicator
 
@@ -49,7 +47,7 @@ function TheatresList() {
       dispatch(HideLoading()); // Hide loading indicator
       message.error(error.message); // Display error message
     }
-  };
+  }, [dispatch, user._id]);
 
   // Function to handle theatre deletion
   const handleDelete = async (id) => {
@@ -96,7 +94,7 @@ function TheatresList() {
     {
       title: "Status",
       dataIndex: "isActive",
-      render: (text, record) => {
+      render: (text) => {
         if (text) {
           return "Approved";
         } else {
@@ -147,7 +145,7 @@ function TheatresList() {
   // Fetch theatre data when the component mounts
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   // Render the component's UI
   return (

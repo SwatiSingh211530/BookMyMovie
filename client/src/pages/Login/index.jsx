@@ -1,6 +1,6 @@
 // Importing the necessary libraries and components
 import React, { useEffect } from "react";
-import { Form, message, Input, Button, Card, Typography, Row, Col, Divider } from "antd";
+import { Form, message, Input, Button, Card, Typography, Divider } from "antd";
 import { UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone, LoginOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginUser, GetCurrentUser } from "../../apicalls/users";
@@ -9,8 +9,8 @@ import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 
 const { Title, Text } = Typography;
 
-// Defining the 'Register' functional component
-function Register() {
+// Defining the 'Login' functional component
+function Login() {
   const navigate = useNavigate(); // Creating a navigate function using the 'useNavigate' hook from the 'react-router-dom' library
   const dispatch = useDispatch(); // Creating a dispatch function using the 'useDispatch' hook from the 'react-redux' library
   // Creating a function 'onFinish' that will be called when the form is submitted successfully
@@ -53,20 +53,126 @@ function Register() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
+      background: '#000'
     }}>
-      <Row justify="center" align="middle" style={{ width: '100%', maxWidth: '1200px' }}>
-        <Col xs={24} sm={20} md={16} lg={12} xl={10}>
+      {/* Left Side - Movie Theater Theme */}
+      <div style={{
+        flex: 1,
+        background: `
+          linear-gradient(135deg, rgba(0,0,0,0.7), rgba(102, 126, 234, 0.4)),
+          url("https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '40px',
+        color: 'white',
+        position: 'relative'
+      }}>
+        {/* Movie Theater Elements */}
+        <div style={{ textAlign: 'center', zIndex: 2 }}>
+          <div style={{ fontSize: '120px', marginBottom: '20px' }}>🎬</div>
+          <Title level={1} style={{ 
+            color: 'white', 
+            fontSize: '48px', 
+            fontWeight: 'bold', 
+            marginBottom: '16px',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
+            BookMyMovie
+          </Title>
+          <Text style={{ 
+            fontSize: '22px', 
+            color: 'white', 
+            display: 'block', 
+            marginBottom: '30px',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+          }}>
+            Your Gateway to Cinematic Adventures
+          </Text>
+          
+          {/* Movie Theater Icons */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '30px',
+            marginTop: '40px',
+            fontSize: '32px'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎭</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Theater</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🍿</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Snacks</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎪</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Shows</Text>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '10px' }}>🎫</div>
+              <Text style={{ color: 'white', fontSize: '14px' }}>Tickets</Text>
+            </div>
+          </div>
+        </div>
+        
+        {/* Floating movie elements */}
+        <div style={{
+          position: 'absolute',
+          top: '10%',
+          left: '10%',
+          fontSize: '32px',
+          opacity: 0.8,
+          animation: 'float 3s ease-in-out infinite'
+        }}>🎥</div>
+        <div style={{
+          position: 'absolute',
+          top: '25%',
+          right: '8%',
+          fontSize: '28px',
+          opacity: 0.7,
+          animation: 'float 4s ease-in-out infinite reverse'
+        }}>🌟</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '30%',
+          left: '8%',
+          fontSize: '24px',
+          opacity: 0.6,
+          animation: 'float 5s ease-in-out infinite'
+        }}>🎪</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '15%',
+          right: '12%',
+          fontSize: '30px',
+          opacity: 0.7,
+          animation: 'float 3.5s ease-in-out infinite reverse'
+        }}>�</div>
+      </div>
+
+      {/* Right Side - Login Form */}
+      <div style={{
+        flex: 1,
+        background: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '40px'
+      }}>
+        <div style={{ width: '100%', maxWidth: '400px' }}>
           <Card
             style={{
               borderRadius: '16px',
               boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
               border: 'none',
-              overflow: 'hidden'
+              padding: '20px'
             }}
           >
             {/* Header Section */}
@@ -181,11 +287,11 @@ function Register() {
               </Text>
             </div>
           </Card>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 }
 
 // Exporting the 'Login' component as the default export
-export default Register;
+export default Login;

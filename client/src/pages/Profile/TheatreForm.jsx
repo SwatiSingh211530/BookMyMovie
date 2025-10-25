@@ -11,7 +11,6 @@ function TheatreForm({
   showTheatreFormModal,
   setShowTheatreFormModal,
   formType,
-  setFormType,
   selectedTheatre,
   setSelectedTheatre,
   getData,

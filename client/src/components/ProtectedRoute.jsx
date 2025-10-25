@@ -71,10 +71,10 @@ function ProtectedRoute({ children }) {
 
   // Render the content conditionally based on the user state
   return (
-    user && ( // If the user state is not null, render the child elements passed to the component
+    user ? ( // If the user state is not null, render the child elements passed to the component
       <div className="layout p-1">
         <div className="header bg-primary flex justify-between p-2">
-          <div 
+          <div
             className="flex items-center cursor-pointer"
             onClick={() => navigate("/")}
           >
@@ -112,6 +112,17 @@ function ProtectedRoute({ children }) {
         <div className="content mt-1 p-1">
           {children} {/* Render the child elements passed to the component */}
         </div>
+      </div>
+    ) : (
+      // Show loading or redirect message while checking authentication
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '18px'
+      }}>
+        Checking authentication...
       </div>
     )
   );

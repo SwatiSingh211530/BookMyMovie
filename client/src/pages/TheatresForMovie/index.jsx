@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { 
   Col, 
   Row, 
@@ -43,7 +43,7 @@ function TheatresForMovie() {
   const params = useParams(); // Creating a params variable using the useParams hook
 
   // Define a function called 'getData' to fetch all movies from the API.
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       dispatch(ShowLoading()); // `dispatch` is a function provided to every Redux component by the `react-redux` package.
       const response = await GetMovieById(params.id); // Calling the API function to fetch all movies
@@ -57,9 +57,9 @@ function TheatresForMovie() {
       dispatch(HideLoading()); // Dispatching a Redux action to hide loading indicator
       message.error(error.message); // Displaying an error message using Ant Design's message component
     }
-  };
+  }, [dispatch, params.id]);
 
-  const getTheatres = async () => {
+  const getTheatres = useCallback(async () => {
     try {
       dispatch(ShowLoading()); // `dispatch` is a function provided to every Redux component by the `react-redux` package.
       const response = await GetAllTheatresByMovie({
@@ -76,17 +76,17 @@ function TheatresForMovie() {
       dispatch(HideLoading()); // Dispatching a Redux action to hide loading indicator
       message.error(error.message); // Displaying an error message using Ant Design's message component
     }
-  };
+  }, [dispatch, date, params.id]);
 
   // The useEffect hook is used to run the 'getData' function when the component is mounted.
   useEffect(() => {
     getData();
-  }, []); // Passing an empty array as the second argument ensures that the 'getData' function is called only once.
+  }, [getData]);
 
   // Use the useEffect hook to run the 'getTheatres' function when the 'date' state variable changes.
   useEffect(() => {
     getTheatres();
-  }, [date]); // Passing the 'date' state variable as the second argument ensures that the 'getTheatres' function is called whenever the 'date' state variable changes.
+  }, [getTheatres]);
 
   const { Title, Text } = Typography;
 
@@ -219,9 +219,9 @@ function TheatresForMovie() {
                           }}>
                             {theatre.shows
                               .sort((a, b) => moment(a.time, "HH:mm") - moment(b.time, "HH:mm"))
-                              .map((show, index) => (
+                              .map((show, _index) => (
                                 <Button
-                                  key={index}
+                                  key={_index}
                                   type="primary"
                                   ghost
                                   size="small"

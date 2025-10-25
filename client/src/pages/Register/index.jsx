@@ -1,6 +1,6 @@
 // Importing the necessary libraries and components
 import React, { useEffect } from "react";
-import { Form, message, Input, Button, Card, Typography, Row, Col, Divider, Checkbox } from "antd";
+import { Form, message, Input, Button, Card, Typography, Divider, Checkbox } from "antd";
 import { UserOutlined, MailOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone, UserAddOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterUser } from "../../apicalls/users";
@@ -22,10 +22,10 @@ function Register() {
       dispatch(HideLoading()); // Dispatching the 'HideLoading' action to hide the loading indicator
       if (response.success) {
         message.success(response.message); // Displaying a success message using the 'message' component from the 'antd' library
-        
+
         // Store the JWT token in localStorage for auto-login
         localStorage.setItem("token", response.data);
-        
+
         // Redirect to homepage after successful registration and auto-login
         navigate("/");
       } else {
@@ -46,28 +46,134 @@ function Register() {
 
   // JSX code representing the UI of the 'Register' component
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+    <div style={{
+      minHeight: '100vh',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
+      background: '#000'
     }}>
-      <Row justify="center" align="middle" style={{ width: '100%', maxWidth: '1200px' }}>
-        <Col xs={24} sm={20} md={16} lg={12} xl={10}>
-          <Card 
-            style={{ 
+      {/* Left Side - Movie Theater Theme */}
+      <div style={{
+        flex: 1,
+        background: `
+          linear-gradient(135deg, rgba(0,0,0,0.7), rgba(126, 87, 194, 0.4)),
+          url("https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1925&q=80")
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '40px',
+        color: 'white',
+        position: 'relative'
+      }}>
+        {/* Cinema Elements */}
+        <div style={{ textAlign: 'center', zIndex: 2 }}>
+          <div style={{ fontSize: '120px', marginBottom: '20px' }}>🎪</div>
+          <Title level={1} style={{ 
+            color: 'white', 
+            fontSize: '48px', 
+            fontWeight: 'bold', 
+            marginBottom: '16px',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
+            Join the Show
+          </Title>
+          <Text style={{ 
+            fontSize: '22px', 
+            color: 'white', 
+            display: 'block', 
+            marginBottom: '30px',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+          }}>
+            Create Your Movie Adventure Account
+          </Text>
+          
+          {/* Cinema Features */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            gap: '20px',
+            marginTop: '40px',
+            fontSize: '18px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <span style={{ fontSize: '24px' }}>🎬</span>
+              <Text style={{ color: 'white' }}>Book Latest Movies</Text>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <span style={{ fontSize: '24px' }}>💺</span>
+              <Text style={{ color: 'white' }}>Choose Your Seats</Text>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <span style={{ fontSize: '24px' }}>🎫</span>
+              <Text style={{ color: 'white' }}>Digital Tickets</Text>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <span style={{ fontSize: '24px' }}>⭐</span>
+              <Text style={{ color: 'white' }}>Rate & Review</Text>
+            </div>
+          </div>
+        </div>
+        
+        {/* Floating cinema elements */}
+        <div style={{
+          position: 'absolute',
+          top: '12%',
+          right: '10%',
+          fontSize: '32px',
+          opacity: 0.8,
+          animation: 'float 3s ease-in-out infinite'
+        }}>🍿</div>
+        <div style={{
+          position: 'absolute',
+          top: '30%',
+          left: '8%',
+          fontSize: '28px',
+          opacity: 0.7,
+          animation: 'float 4s ease-in-out infinite reverse'
+        }}>🎭</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '25%',
+          right: '15%',
+          fontSize: '26px',
+          opacity: 0.6,
+          animation: 'float 5s ease-in-out infinite'
+        }}>🎬</div>
+        <div style={{
+          position: 'absolute',
+          bottom: '10%',
+          left: '12%',
+          fontSize: '30px',
+          opacity: 0.7,
+          animation: 'float 3.5s ease-in-out infinite reverse'
+        }}>�</div>
+      </div>
+
+      {/* Right Side - Registration Form */}
+      <div style={{
+        flex: 1,
+        background: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '40px'
+      }}>
+        <div style={{ width: '100%', maxWidth: '400px' }}>
+          <Card
+            style={{
               borderRadius: '16px',
               boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
               border: 'none',
-              overflow: 'hidden'
+              padding: '20px'
             }}
           >
             {/* Header Section */}
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <div style={{ 
-                fontSize: '48px', 
+              <div style={{
+                fontSize: '48px',
                 marginBottom: '16px',
                 background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
                 WebkitBackgroundClip: 'text',
@@ -122,7 +228,7 @@ function Register() {
                 rules={[
                   { required: true, message: "Please create a password!" },
                   { min: 6, message: "Password must be at least 6 characters!" },
-                  { 
+                  {
                     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
                     message: "Password must contain at least one uppercase letter, one lowercase letter, and one number!"
                   }
@@ -180,7 +286,7 @@ function Register() {
                 name="agreement"
                 valuePropName="checked"
                 rules={[
-                  { 
+                  {
                     validator: (_, value) =>
                       value ? Promise.resolve() : Promise.reject(new Error('Please accept the terms and conditions!')),
                   },
@@ -218,10 +324,10 @@ function Register() {
               <div style={{ textAlign: 'center' }}>
                 <Text>
                   Already a member?{' '}
-                  <Link 
-                    to="/login" 
-                    style={{ 
-                      color: '#764ba2', 
+                  <Link
+                    to="/login"
+                    style={{
+                      color: '#764ba2',
                       fontWeight: '500',
                       textDecoration: 'none'
                     }}
@@ -233,10 +339,10 @@ function Register() {
             </Form>
 
             {/* Benefits Section */}
-            <div style={{ 
-              marginTop: '24px', 
-              padding: '16px', 
-              background: '#f8f9fa', 
+            <div style={{
+              marginTop: '24px',
+              padding: '16px',
+              background: '#f8f9fa',
               borderRadius: '8px',
               border: '1px solid #e9ecef'
             }}>
@@ -251,8 +357,8 @@ function Register() {
               </ul>
             </div>
           </Card>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 }

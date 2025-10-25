@@ -12,8 +12,7 @@ import {
   GetMoviesByGenreFromTMDB,
   SearchMoviesFromTMDB,
   ImportMovieFromTMDB,
-  GetMovieDetailsFromTMDB,
-  ClearMoviesCache
+  GetMovieDetailsFromTMDB
 } from "../../apicalls/movies"; // Importing API call functions for movies
 import { useNavigate } from "react-router-dom"; // Importing useNavigate hook from React Router DOM
 import moment from "moment";
@@ -51,7 +50,7 @@ function Home() {
       const response = await GetAllMovies(); // Calling the API function to fetch all movies (with caching)
       if (response.success) {
         setMovies(response.data); // Setting the state variable to store the movies
-        
+
         // Show appropriate message based on data source
         if (response.fromCache) {
           if (response.fallback) {
@@ -227,7 +226,7 @@ function Home() {
   const renderMovieCards = (movieList, isLocal = false) => {
     return (
       <Row gutter={[20, 20]} className="mt-2">
-        {movieList.map((movie, index) => (
+        {movieList.map((movie, _index) => (
           <Col xs={24} sm={12} md={8} lg={6} key={isLocal ? movie._id : movie.id}>
             <Card
               hoverable

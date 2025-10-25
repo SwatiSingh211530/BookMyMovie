@@ -1,11 +1,11 @@
 // Importing required dependencies and components from external libraries and files.
 import { Col, Form, Modal, Row, Table, message } from "antd";
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import Button from "../../../components/Button"; // Importing a custom Button component.
 import { GetAllMovies } from "../../../apicalls/movies"; // Importing API call functions.
 import { useDispatch } from "react-redux"; // Importing Redux hook for dispatching actions.
 import { ShowLoading, HideLoading } from "../../../redux/loadersSlice"; // Importing Redux actions for loading state.
-import { useEffect } from "react"; // Importing React hook for side effects.
+// duplicate useEffect import removed
 import {
   AddShow,
   DeleteShow,
@@ -23,7 +23,7 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
   const dispatch = useDispatch(); // Getting the dispatch function from Redux.
 
   // Defining an asynchronous function to fetch data from APIs.
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       dispatch(ShowLoading()); // Dispatching a Redux action to show loading state.
       const moviesResponse = await GetAllMovies(); // Calling the GetAllMovies API.
@@ -50,7 +50,7 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
       message.error(error.message); // Displaying an error message if an exception occurs.
       dispatch(HideLoading()); // Dispatching a Redux action to hide loading state.
     }
-  };
+  }, [dispatch, theatre]);
 
   // Defining an asynchronous function to handle adding a new show.
   const handleAddShow = async (values) => {
@@ -108,8 +108,8 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
     {
       title: "Date",
       dataIndex: "date",
-      // Custom rendering for the 'date' column
-      render: (text, record) => {
+      // Custom rendering for the 'date' column (only uses text)
+      render: (text) => {
         return moment(text).format("MMM Do YYYY"); // Formatting the date using the 'moment' library
       },
     },
@@ -166,7 +166,7 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
   // Fetching data when the component mounts using the 'useEffect' hook
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   // Rendering the component's UI
   return (
