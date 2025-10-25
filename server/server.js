@@ -48,7 +48,7 @@ app.use(express.json());
 // Import the userRoute module containing route handlers for user-related operations
 const userRoute = require('./routes/userRoute');
 
-CLIENT_URL = https://book-my-movie23.vercel.app// Import the movieRoute module containing route handlers for movie-related operations
+// Import the movieRoute module containing route handlers for movie-related operations
 const moviesRoute = require('./routes/moviesRoute');
 
 // Import the theatreRoute module containing route handlers for theatre-related operations

@@ -33,8 +33,8 @@ router.post('/register', async (req, res) => {
         });
 
         // Send a response indicating successful user creation with auto-login token
-        res.send({ 
-            success: true, 
+        res.send({
+            success: true,
             message: 'User created and logged in successfully',
             data: token
         });
