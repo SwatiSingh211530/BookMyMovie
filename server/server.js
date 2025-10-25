@@ -16,7 +16,9 @@ const dbConfig = require('./config/dbConfig');
 // CORS configuration - Allow multiple origins
 const allowedOrigins = [
     'http://localhost:3000', // Local development
+    'http://localhost:3001', // Alternative local port
     'https://book-my-movie23.vercel.app', // Vercel deployment
+    'https://bookmymovie-frontend.onrender.com', // Render frontend (if deployed)
     process.env.CLIENT_URL // Environment variable from Render
 ].filter(Boolean); // Remove any undefined values
 

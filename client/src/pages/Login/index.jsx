@@ -242,20 +242,18 @@ function Login() {
                   🔒 Remember me for 30 days
                 </Checkbox>
               </Form.Item>
-              <Link 
-                to="/forgot-password" 
+              <span
                 style={{ 
-                  color: '#667eea', 
+                  color: '#999', 
                   fontSize: '14px', 
-                  textDecoration: 'none',
                   fontWeight: '500',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '4px'
                 }}
               >
-                🔑 Forgot Password?
-              </Link>
+                🔑 Forgot Password? (Coming Soon)
+              </span>
             </div>
 
             <Form.Item style={{ marginBottom: '20px' }}>

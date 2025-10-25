@@ -6,25 +6,62 @@ const mongoose = require('mongoose');
 // Setting 'strictQuery' to 'false' allows you to perform queries with properties that are not explicitly defined in the schema without triggering an error.
 mongoose.set('strictQuery', false);
 
-// Establishing a connection to the MongoDB database using the 'mongoose.connect' method.
-// The connection URL is fetched from the environment variable 'mongo_url' using 'process.env'.
-mongoose.connect(process.env.mongo_url);
+// Enhanced MongoDB connection with better error handling and options
+const connectDB = async () => {
+    try {
+        // Connection options for better stability
+        const options = {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+            socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+            maxPoolSize: 10, // Maintain up to 10 socket connections
+        };
+
+        // Establishing a connection to the MongoDB database
+        await mongoose.connect(process.env.mongo_url, options);
+        console.log('✅ MongoDB Connected Successfully!');
+        console.log(`📍 Database: ${mongoose.connection.name}`);
+        console.log(`🌐 Host: ${mongoose.connection.host}`);
+        
+    } catch (error) {
+        console.log('❌ MongoDB Connection Failed!');
+        console.log('🔍 Error Details:', error.message);
+        
+        // Provide helpful troubleshooting information
+        if (error.message.includes('IP')) {
+            console.log('💡 Possible Solution: Add your IP address to MongoDB Atlas whitelist');
+            console.log('🔗 Atlas IP Whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/');
+        }
+        
+        if (error.message.includes('authentication')) {
+            console.log('💡 Possible Solution: Check your username and password in the connection string');
+        }
+        
+        // Don't exit in development - allow server to run for testing
+        if (process.env.NODE_ENV === 'production') {
+            process.exit(1);
+        } else {
+            console.log('⚠️  Server continuing in development mode without database connection');
+        }
+    }
+};
+
+// Call the connection function
+connectDB();
 
 // Creating a variable named 'connection' and assigning it the Mongoose connection object.
-// This connection object represents the connection to the MongoDB database.
 const connection = mongoose.connection;
 
-// Setting up an event listener for the 'connected' event of the MongoDB connection.
-// When the connection is successfully established, the code inside the callback function (the arrow function) will be executed.
+// Additional connection event handlers
 connection.on('connected', () => {
-    // Logging the message "Mongo DB Connection Successful!" to the console, indicating that the connection to the MongoDB database was successful.
-    console.log('Mongo DB Connection Successful!');
+    console.log('🔗 Mongoose connected to MongoDB');
 });
 
-// Setting up an event listener for the 'error' event of the MongoDB connection.
-// If there is an error while trying to establish the connection, the code inside the callback function will be executed,
-// and the error will be passed as the 'err' parameter.
 connection.on('error', (err) => {
-    // Logging the message "Mongo DB Connection Failed" to the console, indicating that there was an error while trying to connect to the MongoDB database.
-    console.log('Mongo DB Connection Failed');
+    console.log('❌ Mongoose connection error:', err.message);
+});
+
+connection.on('disconnected', () => {
+    console.log('🔌 Mongoose disconnected from MongoDB');
 });

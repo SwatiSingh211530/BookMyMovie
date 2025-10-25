@@ -1,3 +1,9 @@
+# BookMyMovie - Movie Ticket Booking Application
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap location (if you have one)
+Sitemap: https://book-my-movie23.vercel.app/sitemap.xml

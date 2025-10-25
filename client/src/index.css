@@ -1,5 +1,5 @@
-/* Import the "Montserrat" font with a font weight of 600 from Google Fonts, and use "swap" display option for better performance. */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+/* Import movie-themed fonts from Google Fonts for better cinema experience */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@600&display=swap");
 
 /* Apply the following styles to all HTML elements on the page. */
 
@@ -8,9 +8,9 @@ body {
   background-color: #f5f5f5;
 }
 
-/* Set the font-family for all elements to "Montserrat" first, and then fallback to a generic sans-serif font. */
+/* Set the font-family for all elements to "Poppins" for modern movie experience, with "Montserrat" as fallback */
 * {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", "Montserrat", sans-serif;
 
   /* Set the box-sizing property to "border-box". */
   /* This ensures that the element's width and height include the padding and border, but not the margin. */

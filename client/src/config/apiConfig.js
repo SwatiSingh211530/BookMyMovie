@@ -1,9 +1,9 @@
 // API Configuration
 // This file centralizes all API endpoints and base URLs
 
-// Get the API base URL from environment variables
-export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
-export const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+// Get the API base URL from environment variables or use production Render URL
+export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://bookmymovie-j9qi.onrender.com/api';
+export const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://bookmymovie-j9qi.onrender.com';
 
 // API Endpoints
 export const API_ENDPOINTS = {
