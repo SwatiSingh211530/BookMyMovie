@@ -1,6 +1,6 @@
 // Importing the necessary libraries and components
 import React, { useEffect } from "react";
-import { Form, message, Input, Button, Card, Typography, Divider } from "antd";
+import { Form, message, Input, Button, Card, Typography, Divider, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone, LoginOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginUser, GetCurrentUser } from "../../apicalls/users";
@@ -182,6 +182,25 @@ function Login() {
               />
             </Form.Item>
 
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Form.Item name="remember" valuePropName="checked" style={{ margin: 0 }}>
+                <Checkbox style={{ fontSize: '14px', color: '#666' }}>
+                  Remember me
+                </Checkbox>
+              </Form.Item>
+              <Link 
+                to="/forgot-password" 
+                style={{ 
+                  color: '#667eea', 
+                  fontSize: '14px', 
+                  textDecoration: 'none',
+                  fontWeight: '500'
+                }}
+              >
+                Forgot Password?
+              </Link>
+            </div>
+
             <Form.Item style={{ marginBottom: '20px' }}>
               <Button
                 type="primary"
@@ -195,14 +214,34 @@ function Login() {
                   border: 'none',
                   fontSize: '18px',
                   fontWeight: '600',
-                  boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)'
+                  boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)',
+                  transition: 'all 0.3s ease'
                 }}
               >
                 Sign In to BookMyMovie
               </Button>
             </Form.Item>
 
-            <Divider style={{ margin: '24px 0' }}>
+            {/* Quick Login Options */}
+            <div style={{ 
+              textAlign: 'center', 
+              marginBottom: '16px',
+              padding: '12px',
+              background: 'rgba(102, 126, 234, 0.05)',
+              borderRadius: '8px',
+              border: '1px dashed rgba(102, 126, 234, 0.2)'
+            }}>
+              <Text style={{ fontSize: '13px', color: '#667eea', fontWeight: '500' }}>
+                🚀 Quick Test Login
+              </Text>
+              <div style={{ marginTop: '6px' }}>
+                <Text style={{ fontSize: '12px', color: '#666' }}>
+                  Admin: admin@example.com • User: user@example.com
+                </Text>
+              </div>
+            </div>
+
+            <Divider style={{ margin: '20px 0' }}>
               <Text type="secondary">New to BookMyMovie?</Text>
             </Divider>
 

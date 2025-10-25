@@ -189,15 +189,37 @@ function Register() {
               name="password"
               rules={[
                 { required: true, message: "Please enter your password!" },
-                { min: 6, message: "Password must be at least 6 characters!" }
+                { min: 8, message: "Password must be at least 8 characters!" },
+                { 
+                  pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 
+                  message: "Password must contain uppercase, lowercase, and number!" 
+                }
               ]}
+              extra={
+                <Text style={{ fontSize: '12px', color: '#666' }}>
+                  Password should contain uppercase, lowercase letters and numbers
+                </Text>
+              }
             >
               <Input.Password
                 prefix={<LockOutlined style={{ color: '#4caf50' }} />}
-                placeholder="Create a strong password"
+                placeholder="Create a strong password (min 8 chars)"
                 iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                 style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
               />
+            </Form.Item>
+
+            <Form.Item
+              name="isAdmin"
+              valuePropName="checked"
+              style={{ marginBottom: '16px' }}
+            >
+              <Checkbox style={{ fontSize: '14px' }}>
+                <span style={{ color: '#ff5722', fontWeight: '500' }}>🎭 Register as Cinema Admin</span>
+                <Text style={{ display: 'block', fontSize: '12px', color: '#666', marginTop: '2px' }}>
+                  (Admin accounts can manage theaters and shows)
+                </Text>
+              </Checkbox>
             </Form.Item>
 
             <Form.Item
@@ -226,7 +248,12 @@ function Register() {
                   border: 'none',
                   fontSize: '17px',
                   fontWeight: '600',
-                  boxShadow: '0 4px 15px rgba(76, 175, 80, 0.4)'
+                  boxShadow: '0 4px 15px rgba(76, 175, 80, 0.4)',
+                  transition: 'all 0.3s ease',
+                  ':hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 6px 20px rgba(76, 175, 80, 0.6)'
+                  }
                 }}
               >
                 Create My Account
@@ -257,23 +284,33 @@ function Register() {
           {/* Features highlight */}
           <div style={{
             marginTop: '20px',
-            padding: '14px',
-            background: 'rgba(76, 175, 80, 0.1)',
+            padding: '16px',
+            background: 'linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.05))',
             borderRadius: '12px',
-            border: '1px solid rgba(76, 175, 80, 0.2)'
+            border: '1px solid rgba(76, 175, 80, 0.2)',
+            boxShadow: '0 2px 8px rgba(76, 175, 80, 0.1)'
           }}>
-            <Text strong style={{ display: 'block', marginBottom: '6px', color: '#2e7d32', fontSize: '14px' }}>
-              🎭 What you'll get:
+            <Text strong style={{ display: 'block', marginBottom: '8px', color: '#2e7d32', fontSize: '15px' }}>
+              🎭 Join the Cinema Experience:
             </Text>
-            <Text style={{ display: 'block', fontSize: '12px', color: '#4caf50', marginBottom: '2px' }}>
-              • Book tickets for the latest movies
-            </Text>
-            <Text style={{ display: 'block', fontSize: '12px', color: '#4caf50', marginBottom: '2px' }}>
-              • Exclusive early access to premieres
-            </Text>
-            <Text style={{ display: 'block', fontSize: '12px', color: '#4caf50' }}>
-              • Personalized movie recommendations
-            </Text>
+            <div style={{ display: 'grid', gap: '4px' }}>
+              <Text style={{ fontSize: '13px', color: '#4caf50', display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: '8px' }}>🎬</span>
+                Book tickets for the latest blockbusters
+              </Text>
+              <Text style={{ fontSize: '13px', color: '#4caf50', display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: '8px' }}>⭐</span>
+                Exclusive early access to premieres
+              </Text>
+              <Text style={{ fontSize: '13px', color: '#4caf50', display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: '8px' }}>🎯</span>
+                Personalized movie recommendations
+              </Text>
+              <Text style={{ fontSize: '13px', color: '#4caf50', display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: '8px' }}>🍿</span>
+                Special discounts and offers
+              </Text>
+            </div>
           </div>
         </Card>
       </div>
