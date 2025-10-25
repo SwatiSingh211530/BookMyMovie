@@ -74,11 +74,12 @@ function ProtectedRoute({ children }) {
     user && ( // If the user state is not null, render the child elements passed to the component
       <div className="layout p-1">
         <div className="header bg-primary flex justify-between p-2">
-          <div>
-            <h1
-              className="text-2xl text-white cursor-pointer"
-              onClick={() => navigate("/")}
-            >
+          <div 
+            className="flex items-center cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <span className="text-3xl mr-2">🎬</span>
+            <h1 className="text-2xl text-white font-bold">
               BookMyMovie
             </h1>
           </div>

@@ -174,10 +174,10 @@ function Register() {
                 Demo Credentials:
               </Text>
               <Text style={{ display: 'block', fontSize: '13px', color: '#6c757d' }}>
-                <strong>Admin:</strong> admin@bookmymovie.com / password123
+                <strong>Admin:</strong> admin@example.com / password123
               </Text>
               <Text style={{ display: 'block', fontSize: '13px', color: '#6c757d' }}>
-                <strong>User:</strong> user@bookmymovie.com / password123
+                <strong>User:</strong> user@example.com / password123
               </Text>
             </div>
           </Card>
