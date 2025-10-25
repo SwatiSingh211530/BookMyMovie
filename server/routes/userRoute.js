@@ -27,8 +27,17 @@ router.post('/register', async (req, res) => {
         const newUser = new User(req.body); // Create a new User instance with the user data from the request
         await newUser.save(); // Save the new user to the database
 
-        // Send a response indicating successful user creation
-        res.send({ success: true, message: 'User created successfully' });
+        // Create and assign a token using JWT for auto-login after registration
+        const token = jwt.sign({ userId: newUser._id }, process.env.jwt_secret, {
+            expiresIn: '1d', // Token expires in 1 day
+        });
+
+        // Send a response indicating successful user creation with auto-login token
+        res.send({ 
+            success: true, 
+            message: 'User created and logged in successfully',
+            data: token
+        });
 
     } catch (error) {
         // If an error occurs, send an error response

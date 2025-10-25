@@ -24,16 +24,16 @@ app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (mobile apps, etc.)
         if (!origin) return callback(null, true);
-        
+
         if (allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
-        
+
         // For development, also allow any localhost
         if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
             return callback(null, true);
         }
-        
+
         const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), false);
     },
@@ -48,7 +48,7 @@ app.use(express.json());
 // Import the userRoute module containing route handlers for user-related operations
 const userRoute = require('./routes/userRoute');
 
-// Import the movieRoute module containing route handlers for movie-related operations
+CLIENT_URL = https://book-my-movie23.vercel.app// Import the movieRoute module containing route handlers for movie-related operations
 const moviesRoute = require('./routes/moviesRoute');
 
 // Import the theatreRoute module containing route handlers for theatre-related operations
