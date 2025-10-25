@@ -11,357 +11,274 @@ const { Title, Text } = Typography;
 
 // Defining the 'Register' functional component
 function Register() {
-  const dispatch = useDispatch(); // Creating a dispatch function using the 'useDispatch' hook from the 'react-redux' library
-  const navigate = useNavigate(); // Creating a navigate function using the 'useNavigate' hook from the 'react-router-dom' library
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // Callback function for form submission
   const onFinish = async (values) => {
     try {
-      dispatch(ShowLoading()); // Dispatching the 'ShowLoading' action to show the loading indicator
-      const response = await RegisterUser(values); // Making an asynchronous API call to register the user
-      dispatch(HideLoading()); // Dispatching the 'HideLoading' action to hide the loading indicator
+      dispatch(ShowLoading());
+      const response = await RegisterUser(values);
+      dispatch(HideLoading());
       if (response.success) {
-        message.success(response.message); // Displaying a success message using the 'message' component from the 'antd' library
-
-        // Store the JWT token in localStorage for auto-login
+        message.success(response.message);
         localStorage.setItem("token", response.data);
-
-        // Redirect to homepage after successful registration and auto-login
         navigate("/");
       } else {
-        message.error(response.message); // Displaying an error message using the 'message' component from the 'antd' library
+        message.error(response.message);
       }
     } catch (error) {
-      dispatch(HideLoading()); // Dispatching the 'HideLoading' action to hide the loading indicator
-      message.error(error.message); // Handling API call errors and displaying an error message
+      dispatch(HideLoading());
+      message.error(error.message);
     }
   };
 
-  // useEffect hook to check if the user is already logged in and redirect to the homepage if a token is present
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/"); // Redirecting the user to the homepage using the 'navigate' function
+      navigate("/");
     }
   }, [navigate]);
 
-  // JSX code representing the UI of the 'Register' component
   return (
     <div style={{
       minHeight: '100vh',
       display: 'flex',
-      background: '#000'
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: `
+        linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(76, 175, 80, 0.4)),
+        url("https://images.unsplash.com/photo-1489599143687-585e645b3e1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
+      `,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      position: 'relative',
+      padding: '20px'
     }}>
-      {/* Left Side - Movie Theater Theme */}
+      {/* Floating movie elements */}
       <div style={{
-        flex: 1,
-        background: `
-          linear-gradient(135deg, rgba(0,0,0,0.7), rgba(126, 87, 194, 0.4)),
-          url("https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1925&q=80")
-        `,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        position: 'absolute',
+        top: '8%',
+        left: '12%',
+        fontSize: '36px',
+        opacity: 0.7,
+        animation: 'float 3.5s ease-in-out infinite'
+      }}>🎭</div>
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        right: '10%',
+        fontSize: '32px',
+        opacity: 0.8,
+        animation: 'float 4.2s ease-in-out infinite reverse'
+      }}>🍿</div>
+      <div style={{
+        position: 'absolute',
+        bottom: '25%',
+        left: '6%',
+        fontSize: '28px',
+        opacity: 0.6,
+        animation: 'float 5.1s ease-in-out infinite'
+      }}>🎪</div>
+      <div style={{
+        position: 'absolute',
+        bottom: '10%',
+        right: '8%',
+        fontSize: '30px',
+        opacity: 0.7,
+        animation: 'float 3.8s ease-in-out infinite reverse'
+      }}>🌟</div>
+
+      {/* Movie reel decoration */}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '5%',
+        fontSize: '24px',
+        opacity: 0.4,
+        animation: 'float 6s ease-in-out infinite'
+      }}>🎬</div>
+
+      {/* Theater seats pattern at bottom */}
+      <div style={{
+        position: 'absolute',
+        bottom: '0',
+        left: '0',
+        right: '0',
+        height: '60px',
+        opacity: 0.3,
         display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: '40px',
-        color: 'white',
-        position: 'relative'
+        alignItems: 'end'
       }}>
-        {/* Cinema Elements */}
-        <div style={{ textAlign: 'center', zIndex: 2 }}>
-          <div style={{ fontSize: '120px', marginBottom: '20px' }}>🎪</div>
-          <Title level={1} style={{ 
-            color: 'white', 
-            fontSize: '48px', 
-            fontWeight: 'bold', 
-            marginBottom: '16px',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }}>
-            Join the Show
-          </Title>
-          <Text style={{ 
-            fontSize: '22px', 
-            color: 'white', 
-            display: 'block', 
-            marginBottom: '30px',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
-          }}>
-            Create Your Movie Adventure Account
-          </Text>
-          
-          {/* Cinema Features */}
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column',
-            gap: '20px',
-            marginTop: '40px',
-            fontSize: '18px'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ fontSize: '24px' }}>🎬</span>
-              <Text style={{ color: 'white' }}>Book Latest Movies</Text>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ fontSize: '24px' }}>💺</span>
-              <Text style={{ color: 'white' }}>Choose Your Seats</Text>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ fontSize: '24px' }}>🎫</span>
-              <Text style={{ color: 'white' }}>Digital Tickets</Text>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ fontSize: '24px' }}>⭐</span>
-              <Text style={{ color: 'white' }}>Rate & Review</Text>
-            </div>
-          </div>
-        </div>
-        
-        {/* Floating cinema elements */}
-        <div style={{
-          position: 'absolute',
-          top: '12%',
-          right: '10%',
-          fontSize: '32px',
-          opacity: 0.8,
-          animation: 'float 3s ease-in-out infinite'
-        }}>🍿</div>
-        <div style={{
-          position: 'absolute',
-          top: '30%',
-          left: '8%',
-          fontSize: '28px',
-          opacity: 0.7,
-          animation: 'float 4s ease-in-out infinite reverse'
-        }}>🎭</div>
-        <div style={{
-          position: 'absolute',
-          bottom: '25%',
-          right: '15%',
-          fontSize: '26px',
-          opacity: 0.6,
-          animation: 'float 5s ease-in-out infinite'
-        }}>🎬</div>
-        <div style={{
-          position: 'absolute',
-          bottom: '10%',
-          left: '12%',
-          fontSize: '30px',
-          opacity: 0.7,
-          animation: 'float 3.5s ease-in-out infinite reverse'
-        }}>�</div>
+        {[...Array(18)].map((_, i) => (
+          <div key={i} style={{
+            width: '10px',
+            height: '24px',
+            background: '#4caf50',
+            margin: '0 2px',
+            borderRadius: '5px 5px 0 0'
+          }}></div>
+        ))}
       </div>
 
-      {/* Right Side - Registration Form */}
-      <div style={{
-        flex: 1,
-        background: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '40px'
-      }}>
-        <div style={{ width: '100%', maxWidth: '400px' }}>
-          <Card
-            style={{
-              borderRadius: '16px',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-              border: 'none',
-              padding: '20px'
-            }}
-          >
-            {/* Header Section */}
-            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <div style={{
-                fontSize: '48px',
-                marginBottom: '16px',
-                background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                fontWeight: 'bold'
-              }}>
-                🎬
-              </div>
-              <Title level={2} style={{ margin: 0, color: '#1a1a1a' }}>
-                Join BookMyMovie
-              </Title>
-              <Text type="secondary" style={{ fontSize: '16px' }}>
-                Create your account and start booking amazing movies
-              </Text>
+      {/* Centered Register Form */}
+      <div style={{ width: '100%', maxWidth: '480px', zIndex: 10 }}>
+        <Card
+          style={{
+            borderRadius: '20px',
+            boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
+            border: 'none',
+            padding: '30px',
+            background: 'rgba(255,255,255,0.96)',
+            backdropFilter: 'blur(12px)'
+          }}
+        >
+          {/* Header Section */}
+          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+            <div style={{
+              fontSize: '60px',
+              marginBottom: '12px',
+              background: 'linear-gradient(135deg, #4caf50 0%, #2e7d32 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontWeight: 'bold'
+            }}>
+              🎬
             </div>
+            <Title level={1} style={{ margin: 0, color: '#1a1a1a', fontSize: '30px' }}>
+              Join BookMyMovie
+            </Title>
+            <Text style={{ fontSize: '15px', color: '#666', display: 'block', marginTop: '6px' }}>
+              Create your account and start your cinematic adventure!
+            </Text>
+          </div>
 
-            {/* Registration Form */}
-            <Form layout="vertical" onFinish={onFinish} size="large">
-              <Form.Item
-                label="Full Name"
-                name="name"
-                rules={[
-                  { required: true, message: "Please enter your full name!" },
-                  { min: 2, message: "Name must be at least 2 characters!" }
-                ]}
+          {/* Registration Form */}
+          <Form layout="vertical" onFinish={onFinish} size="large">
+            <Form.Item
+              label="Full Name"
+              name="name"
+              rules={[
+                { required: true, message: "Please enter your full name!" },
+                { min: 2, message: "Name must be at least 2 characters!" }
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined style={{ color: '#4caf50' }} />}
+                placeholder="Enter your full name"
+                style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="Email Address"
+              name="email"
+              rules={[
+                { required: true, message: "Please enter your email!" },
+                { type: 'email', message: "Please enter a valid email!" }
+              ]}
+            >
+              <Input
+                prefix={<MailOutlined style={{ color: '#4caf50' }} />}
+                placeholder="Enter your email address"
+                style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please enter your password!" },
+                { min: 6, message: "Password must be at least 6 characters!" }
+              ]}
+            >
+              <Input.Password
+                prefix={<LockOutlined style={{ color: '#4caf50' }} />}
+                placeholder="Create a strong password"
+                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="terms"
+              valuePropName="checked"
+              rules={[
+                { validator: (_, value) => value ? Promise.resolve() : Promise.reject(new Error('Please accept the terms and conditions')) }
+              ]}
+              style={{ marginBottom: '20px' }}
+            >
+              <Checkbox style={{ fontSize: '14px' }}>
+                I agree to the <span style={{ color: '#4caf50', fontWeight: '500' }}>Terms and Conditions</span>
+              </Checkbox>
+            </Form.Item>
+
+            <Form.Item style={{ marginBottom: '16px' }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                icon={<UserAddOutlined />}
+                style={{
+                  height: '50px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, #4caf50 0%, #2e7d32 100%)',
+                  border: 'none',
+                  fontSize: '17px',
+                  fontWeight: '600',
+                  boxShadow: '0 4px 15px rgba(76, 175, 80, 0.4)'
+                }}
               >
-                <Input
-                  prefix={<UserOutlined style={{ color: '#764ba2' }} />}
-                  placeholder="Enter your full name"
-                  style={{ borderRadius: '8px', padding: '12px' }}
-                />
-              </Form.Item>
+                Create My Account
+              </Button>
+            </Form.Item>
 
-              <Form.Item
-                label="Email Address"
-                name="email"
-                rules={[
-                  { required: true, message: "Please enter your email!" },
-                  { type: 'email', message: "Please enter a valid email!" }
-                ]}
-              >
-                <Input
-                  prefix={<MailOutlined style={{ color: '#764ba2' }} />}
-                  placeholder="Enter your email address"
-                  style={{ borderRadius: '8px', padding: '12px' }}
-                />
-              </Form.Item>
+            <Divider style={{ margin: '20px 0' }}>
+              <Text type="secondary">Already have an account?</Text>
+            </Divider>
 
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  { required: true, message: "Please create a password!" },
-                  { min: 6, message: "Password must be at least 6 characters!" },
-                  {
-                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-                    message: "Password must contain at least one uppercase letter, one lowercase letter, and one number!"
-                  }
-                ]}
-              >
-                <Input.Password
-                  prefix={<LockOutlined style={{ color: '#764ba2' }} />}
-                  placeholder="Create a strong password"
-                  iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                  style={{ borderRadius: '8px', padding: '12px' }}
-                />
-              </Form.Item>
-
-              <Form.Item
-                label="Confirm Password"
-                name="confirmPassword"
-                dependencies={['password']}
-                rules={[
-                  { required: true, message: "Please confirm your password!" },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue('password') === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error('The two passwords do not match!'));
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password
-                  prefix={<LockOutlined style={{ color: '#764ba2' }} />}
-                  placeholder="Confirm your password"
-                  iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                  style={{ borderRadius: '8px', padding: '12px' }}
-                />
-              </Form.Item>
-
-              {/* Admin Role Selection */}
-              <Form.Item
-                name="isAdmin"
-                valuePropName="checked"
-                style={{ marginTop: '16px' }}
-              >
-                <Checkbox style={{ fontSize: '14px', color: '#666' }}>
-                  <span style={{ marginLeft: '8px' }}>
-                    Register as Admin
-                    <Text type="secondary" style={{ display: 'block', fontSize: '12px', marginLeft: '0px' }}>
-                      Check this box if you want admin privileges to manage movies, theatres, and bookings
-                    </Text>
-                  </span>
-                </Checkbox>
-              </Form.Item>
-
-              <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      value ? Promise.resolve() : Promise.reject(new Error('Please accept the terms and conditions!')),
-                  },
-                ]}
-              >
-                <Checkbox>
-                  I agree to the <Link to="/terms" style={{ color: '#764ba2' }}>Terms of Service</Link> and{' '}
-                  <Link to="/privacy" style={{ color: '#764ba2' }}>Privacy Policy</Link>
-                </Checkbox>
-              </Form.Item>
-
-              <Form.Item style={{ marginBottom: '16px' }}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  block
-                  icon={<UserAddOutlined />}
+            <div style={{ textAlign: 'center' }}>
+              <Text>
+                <Link
+                  to="/login"
                   style={{
-                    height: '48px',
-                    borderRadius: '8px',
-                    background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
-                    border: 'none',
-                    fontSize: '16px',
-                    fontWeight: '500'
+                    color: '#4caf50',
+                    fontWeight: '600',
+                    textDecoration: 'none',
+                    fontSize: '16px'
                   }}
                 >
-                  Create Account
-                </Button>
-              </Form.Item>
-
-              <Divider style={{ margin: '24px 0' }}>
-                <Text type="secondary">Already have an account?</Text>
-              </Divider>
-
-              <div style={{ textAlign: 'center' }}>
-                <Text>
-                  Already a member?{' '}
-                  <Link
-                    to="/login"
-                    style={{
-                      color: '#764ba2',
-                      fontWeight: '500',
-                      textDecoration: 'none'
-                    }}
-                  >
-                    Sign In
-                  </Link>
-                </Text>
-              </div>
-            </Form>
-
-            {/* Benefits Section */}
-            <div style={{
-              marginTop: '24px',
-              padding: '16px',
-              background: '#f8f9fa',
-              borderRadius: '8px',
-              border: '1px solid #e9ecef'
-            }}>
-              <Text strong style={{ display: 'block', marginBottom: '8px', color: '#495057' }}>
-                Why join BookMyMovie?
+                  ← Sign In Instead
+                </Link>
               </Text>
-              <ul style={{ margin: 0, paddingLeft: '20px', color: '#6c757d', fontSize: '13px' }}>
-                <li>🎟️ Easy online movie ticket booking</li>
-                <li>🎬 Access to latest movies and showtimes</li>
-                <li>💳 Secure payment processing</li>
-                <li>📱 Mobile-friendly booking experience</li>
-              </ul>
             </div>
-          </Card>
-        </div>
+          </Form>
+
+          {/* Features highlight */}
+          <div style={{
+            marginTop: '20px',
+            padding: '14px',
+            background: 'rgba(76, 175, 80, 0.1)',
+            borderRadius: '12px',
+            border: '1px solid rgba(76, 175, 80, 0.2)'
+          }}>
+            <Text strong style={{ display: 'block', marginBottom: '6px', color: '#2e7d32', fontSize: '14px' }}>
+              🎭 What you'll get:
+            </Text>
+            <Text style={{ display: 'block', fontSize: '12px', color: '#4caf50', marginBottom: '2px' }}>
+              • Book tickets for the latest movies
+            </Text>
+            <Text style={{ display: 'block', fontSize: '12px', color: '#4caf50', marginBottom: '2px' }}>
+              • Exclusive early access to premieres
+            </Text>
+            <Text style={{ display: 'block', fontSize: '12px', color: '#4caf50' }}>
+              • Personalized movie recommendations
+            </Text>
+          </div>
+        </Card>
       </div>
     </div>
   );
 }
 
-// Exporting the 'Register' component as the default export
 export default Register;
