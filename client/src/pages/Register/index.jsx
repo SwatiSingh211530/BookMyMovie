@@ -22,6 +22,12 @@ function Register() {
       dispatch(HideLoading()); // Dispatching the 'HideLoading' action to hide the loading indicator
       if (response.success) {
         message.success(response.message); // Displaying a success message using the 'message' component from the 'antd' library
+        
+        // Store the JWT token in localStorage for auto-login
+        localStorage.setItem("token", response.data);
+        
+        // Redirect to homepage after successful registration and auto-login
+        navigate("/");
       } else {
         message.error(response.message); // Displaying an error message using the 'message' component from the 'antd' library
       }
