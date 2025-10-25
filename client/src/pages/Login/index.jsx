@@ -118,13 +118,13 @@ function Login() {
       </div>
 
       {/* Centered Login Form */}
-      <div style={{ width: '100%', maxWidth: '450px', zIndex: 10 }}>
+      <div style={{ width: '100%', maxWidth: '800px', zIndex: 10 }}>
         <Card
           style={{
             borderRadius: '20px',
             boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
             border: 'none',
-            padding: '30px',
+            padding: '40px',
             background: 'rgba(255,255,255,0.95)',
             backdropFilter: 'blur(10px)'
           }}
@@ -150,42 +150,55 @@ function Login() {
           </div>
 
           {/* Login Form */}
-          <Form layout="vertical" onFinish={onFinish} size="large">
-            <Form.Item
-              label="Email Address"
-              name="email"
-              rules={[
-                { required: true, message: "Please enter your email!" },
-                { type: 'email', message: "Please enter a valid email!" }
-              ]}
-            >
-              <Input
-                prefix={<UserOutlined style={{ color: '#667eea' }} />}
-                placeholder="Enter your email address"
-                style={{ borderRadius: '12px', padding: '14px', fontSize: '16px' }}
-              />
-            </Form.Item>
+          <Form layout="horizontal" onFinish={onFinish} size="large" labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
+              <Form.Item
+                label="Email Address"
+                name="email"
+                rules={[
+                  { required: true, message: "Please enter your email!" },
+                  { type: 'email', message: "Please enter a valid email!" }
+                ]}
+                style={{ flex: 1, marginBottom: 0 }}
+              >
+                <Input
+                  prefix={<UserOutlined style={{ color: '#667eea' }} />}
+                  placeholder="Enter your email address"
+                  style={{ borderRadius: '12px', padding: '14px', fontSize: '16px' }}
+                />
+              </Form.Item>
 
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: "Please enter your password!" },
-                { min: 6, message: "Password must be at least 6 characters!" }
-              ]}
-            >
-              <Input.Password
-                prefix={<LockOutlined style={{ color: '#667eea' }} />}
-                placeholder="Enter your password"
-                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                style={{ borderRadius: '12px', padding: '14px', fontSize: '16px' }}
-              />
-            </Form.Item>
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  { required: true, message: "Please enter your password!" },
+                  { min: 6, message: "Password must be at least 6 characters!" }
+                ]}
+                style={{ flex: 1, marginBottom: 0 }}
+              >
+                <Input.Password
+                  prefix={<LockOutlined style={{ color: '#667eea' }} />}
+                  placeholder="Enter your password"
+                  iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                  style={{ borderRadius: '12px', padding: '14px', fontSize: '16px' }}
+                />
+              </Form.Item>
+            </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center', 
+              marginBottom: '20px',
+              padding: '12px 16px',
+              background: 'rgba(102, 126, 234, 0.05)',
+              borderRadius: '8px',
+              border: '1px solid rgba(102, 126, 234, 0.1)'
+            }}>
               <Form.Item name="remember" valuePropName="checked" style={{ margin: 0 }}>
                 <Checkbox style={{ fontSize: '14px', color: '#666' }}>
-                  Remember me
+                  🔒 Remember me for 30 days
                 </Checkbox>
               </Form.Item>
               <Link 
@@ -194,10 +207,13 @@ function Login() {
                   color: '#667eea', 
                   fontSize: '14px', 
                   textDecoration: 'none',
-                  fontWeight: '500'
+                  fontWeight: '500',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
                 }}
               >
-                Forgot Password?
+                🔑 Forgot Password?
               </Link>
             </div>
 

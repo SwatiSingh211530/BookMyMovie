@@ -121,13 +121,13 @@ function Register() {
       </div>
 
       {/* Centered Register Form */}
-      <div style={{ width: '100%', maxWidth: '480px', zIndex: 10 }}>
+      <div style={{ width: '100%', maxWidth: '900px', zIndex: 10 }}>
         <Card
           style={{
             borderRadius: '20px',
             boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
             border: 'none',
-            padding: '30px',
+            padding: '40px',
             background: 'rgba(255,255,255,0.96)',
             backdropFilter: 'blur(12px)'
           }}
@@ -153,36 +153,40 @@ function Register() {
           </div>
 
           {/* Registration Form */}
-          <Form layout="vertical" onFinish={onFinish} size="large">
-            <Form.Item
-              label="Full Name"
-              name="name"
-              rules={[
-                { required: true, message: "Please enter your full name!" },
-                { min: 2, message: "Name must be at least 2 characters!" }
-              ]}
-            >
-              <Input
-                prefix={<UserOutlined style={{ color: '#4caf50' }} />}
-                placeholder="Enter your full name"
-                style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
-              />
-            </Form.Item>
+          <Form layout="horizontal" onFinish={onFinish} size="large" labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
+              <Form.Item
+                label="Full Name"
+                name="name"
+                rules={[
+                  { required: true, message: "Please enter your full name!" },
+                  { min: 2, message: "Name must be at least 2 characters!" }
+                ]}
+                style={{ flex: 1, marginBottom: 0 }}
+              >
+                <Input
+                  prefix={<UserOutlined style={{ color: '#4caf50' }} />}
+                  placeholder="Enter your full name"
+                  style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
+                />
+              </Form.Item>
 
-            <Form.Item
-              label="Email Address"
-              name="email"
-              rules={[
-                { required: true, message: "Please enter your email!" },
-                { type: 'email', message: "Please enter a valid email!" }
-              ]}
-            >
-              <Input
-                prefix={<MailOutlined style={{ color: '#4caf50' }} />}
-                placeholder="Enter your email address"
-                style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
-              />
-            </Form.Item>
+              <Form.Item
+                label="Email Address"
+                name="email"
+                rules={[
+                  { required: true, message: "Please enter your email!" },
+                  { type: 'email', message: "Please enter a valid email!" }
+                ]}
+                style={{ flex: 1, marginBottom: 0 }}
+              >
+                <Input
+                  prefix={<MailOutlined style={{ color: '#4caf50' }} />}
+                  placeholder="Enter your email address"
+                  style={{ borderRadius: '12px', padding: '12px', fontSize: '15px' }}
+                />
+              </Form.Item>
+            </div>
 
             <Form.Item
               label="Password"
@@ -200,6 +204,7 @@ function Register() {
                   Password should contain uppercase, lowercase letters and numbers
                 </Text>
               }
+              style={{ marginBottom: '16px' }}
             >
               <Input.Password
                 prefix={<LockOutlined style={{ color: '#4caf50' }} />}
@@ -209,31 +214,33 @@ function Register() {
               />
             </Form.Item>
 
-            <Form.Item
-              name="isAdmin"
-              valuePropName="checked"
-              style={{ marginBottom: '16px' }}
-            >
-              <Checkbox style={{ fontSize: '14px' }}>
-                <span style={{ color: '#ff5722', fontWeight: '500' }}>🎭 Register as Cinema Admin</span>
-                <Text style={{ display: 'block', fontSize: '12px', color: '#666', marginTop: '2px' }}>
-                  (Admin accounts can manage theaters and shows)
-                </Text>
-              </Checkbox>
-            </Form.Item>
+            <div style={{ display: 'flex', gap: '24px', marginBottom: '20px', flexWrap: 'wrap' }}>
+              <Form.Item
+                name="isAdmin"
+                valuePropName="checked"
+                style={{ marginBottom: 0, flex: 1, minWidth: '300px' }}
+              >
+                <Checkbox style={{ fontSize: '14px' }}>
+                  <span style={{ color: '#ff5722', fontWeight: '500' }}>🎭 Register as Cinema Admin</span>
+                  <Text style={{ display: 'block', fontSize: '12px', color: '#666', marginTop: '2px' }}>
+                    (Admin accounts can manage theaters and shows)
+                  </Text>
+                </Checkbox>
+              </Form.Item>
 
-            <Form.Item
-              name="terms"
-              valuePropName="checked"
-              rules={[
-                { validator: (_, value) => value ? Promise.resolve() : Promise.reject(new Error('Please accept the terms and conditions')) }
-              ]}
-              style={{ marginBottom: '20px' }}
-            >
-              <Checkbox style={{ fontSize: '14px' }}>
-                I agree to the <span style={{ color: '#4caf50', fontWeight: '500' }}>Terms and Conditions</span>
-              </Checkbox>
-            </Form.Item>
+              <Form.Item
+                name="terms"
+                valuePropName="checked"
+                rules={[
+                  { validator: (_, value) => value ? Promise.resolve() : Promise.reject(new Error('Please accept the terms and conditions')) }
+                ]}
+                style={{ marginBottom: 0, flex: 1, minWidth: '250px' }}
+              >
+                <Checkbox style={{ fontSize: '14px' }}>
+                  I agree to the <span style={{ color: '#4caf50', fontWeight: '500' }}>Terms and Conditions</span>
+                </Checkbox>
+              </Form.Item>
+            </div>
 
             <Form.Item style={{ marginBottom: '16px' }}>
               <Button
