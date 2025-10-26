@@ -1020,6 +1020,13 @@ function Admin() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <Button 
+              type="default" 
+              icon={<HomeOutlined />} 
+              onClick={() => navigate('/')}
+            >
+              Home
+            </Button>
             <Badge count={5}>
               <Button type="text" icon={<BellOutlined />} size="large" />
             </Badge>

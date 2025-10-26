@@ -22,6 +22,7 @@ import {
   EnvironmentOutlined 
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
 import TheatresList from "./TheatresList";
 
@@ -29,6 +30,7 @@ const { Title, Text } = Typography;
 
 function Profile() {
   const { user } = useSelector((state) => state.users);
+  const navigate = useNavigate();
   const [bookingStats, setBookingStats] = useState({
     totalBookings: 0,
     upcomingShows: 0,
@@ -106,6 +108,15 @@ function Profile() {
             </Text>
           </Col>
           <Col>
+            <Button 
+              type="default" 
+              size="large" 
+              icon={<HomeOutlined />}
+              onClick={() => navigate('/')}
+              style={{ marginRight: '12px' }}
+            >
+              Home
+            </Button>
             <Button type="primary" size="large">
               Edit Profile
             </Button>

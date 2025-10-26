@@ -4,6 +4,9 @@ import axios from 'axios';
 // Get the base URL from environment variables or use production Render URL
 const BASE_URL = process.env.REACT_APP_SERVER_URL || 'https://bookmymovie-j9qi.onrender.com';
 
+// Debug log to see which URL is being used
+console.log('API Base URL:', BASE_URL);
+
 // Creating a customized instance of axios with default settings.
 // This instance will be used for making HTTP requests throughout the application.
 export const axiosInstance = axios.create({

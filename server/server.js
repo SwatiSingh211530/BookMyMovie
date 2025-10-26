@@ -17,9 +17,12 @@ const dbConfig = require('./config/dbConfig');
 const allowedOrigins = [
     'http://localhost:3000', // Local development
     'http://localhost:3001', // Alternative local port
-    'https://book-my-movie23.vercel.app', // Vercel deployment
+    'https://book-my-movie23.vercel.app', // Original Vercel deployment
+    'https://bookmymovie-two.vercel.app', // Current Vercel deployment
     'https://bookmymovie-frontend.onrender.com', // Render frontend (if deployed)
-    process.env.CLIENT_URL // Environment variable from Render
+    process.env.CLIENT_URL, // Environment variable from Render
+    /\.vercel\.app$/, // Allow any Vercel domain for flexibility
+    /localhost/ // Allow any localhost for development
 ].filter(Boolean); // Remove any undefined values
 
 app.use(cors({
@@ -27,7 +30,17 @@ app.use(cors({
         // Allow requests with no origin (mobile apps, etc.)
         if (!origin) return callback(null, true);
 
-        if (allowedOrigins.includes(origin)) {
+        // Check if origin matches any of the allowed origins (strings or regex)
+        const isAllowed = allowedOrigins.some(allowedOrigin => {
+            if (typeof allowedOrigin === 'string') {
+                return allowedOrigin === origin;
+            } else if (allowedOrigin instanceof RegExp) {
+                return allowedOrigin.test(origin);
+            }
+            return false;
+        });
+
+        if (isAllowed) {
             return callback(null, true);
         }
 
@@ -36,6 +49,7 @@ app.use(cors({
             return callback(null, true);
         }
 
+        console.log('CORS blocked origin:', origin);
         const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), false);
     },
