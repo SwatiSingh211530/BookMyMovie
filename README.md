@@ -1,6 +1,12 @@
 ﻿# BookMyMovie - MERN Stack Movie Ticket Booking Application
 
 A comprehensive full-stack web application for movie ticket booking built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring JWT authentication, role-based access control, and modern UI/UX design.
+## 🌐 Live Demo
+
+👉 **[https://book-my-movie23.vercel.app/](https://book-my-movie23.vercel.app/)**
+
+Test the live version of the app and explore user, admin, and theatre owner features in real-time!
+
 
 ## Features
 
